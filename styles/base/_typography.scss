@@ -1,0 +1,65 @@
+// Typography
+//
+// Markup: ../../styleguide/basics/typography.hbs
+//
+// Styleguide: Basics.Typography
+
+$font--primary: "Roboto", sans-serif;
+$font--secondary: "Jost", sans-serif;
+
+.uic {
+	font-family: $font--primary;
+	font-weight: 500;
+	&-font {
+		&--primary {
+			font-family: $font--primary;
+		}
+		&--secondary {
+			font-family: $font--secondary;
+		}
+	}
+	&-text {
+		&--lg {
+			font-size: 1.375rem; // 22px;
+			line-height: 1.875rem; // 30px;
+			font-weight: 500;
+		}
+		&--base {
+			font-size: 1.1875rem; // 19px;
+			line-height: 140%; // normal;
+			font-weight: 500;
+		}
+		&--sm {
+			font-size: 0.875rem; // 14px;
+			line-height: 1.4375rem; // 23px;
+		}
+	}
+	&-h1 {
+		@extend .sr-only;
+	}
+	&-h2 {
+		font-weight: 900;
+		font-size: 1.35625rem; // 21.7px;
+		line-height: 120%; // normal;
+		letter-spacing: 0.04em;
+	}
+	&-h3 {
+		font-size: 2.1875rem; // 35px;
+		line-height: 120%; // 2.275rem; // 44px;
+		font-weight: 500;
+	}
+	&-h4 {
+		font-size: 1.375rem; // 22px;
+		line-height: 1.875rem; // 30px;
+	}
+}
+
+
+@media screen and (max-width: 767px) {
+	.uic {
+		&-h3 {
+			font-size: 1.375rem; // 22px;
+			line-height: 120%;
+		}
+	}
+}

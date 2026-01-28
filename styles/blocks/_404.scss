@@ -1,0 +1,13 @@
+.uic-404 {
+    background-color: $palette-blue700;
+    color: $palette-white;
+
+    & .uic-section__inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        gap: 16px;
+    }
+}

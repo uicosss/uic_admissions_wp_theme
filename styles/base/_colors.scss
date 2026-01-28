@@ -1,0 +1,81 @@
+// Colors
+//
+// The color palette for the Thirdwave WordPress Theme
+//
+// Colors:
+// $palette-black: #000000 - Black
+// $palette-gray700: #323232 - Gray 700
+// $palette-gray500: #646464 - Gray 500
+// $palette-gray400: #7D7D7D - Gray 400
+// $palette-gray100: #F5F5F5 - Gray 100
+// $palette-white: #ffffff - White
+// $palette-blue900: #001E62 - Blue 900
+// $palette-blue700: #2D5596 - Blue 700
+// $palette-blue600: #507AA8 - Blue 600
+// $palette-blue500: #007eb0 - Blue 500
+// $palette-blue400: #41B6E6 - Blue 400
+// $palette-blue300: #52AEDC - Blue 300
+// $palette-yellow400: #FFBF3F - Yellow 400
+// $palette-red400: #D50032 - Red 400
+//
+// Styleguide: Basics.Colors
+
+
+$palette-black: #000000;
+$palette-gray700: #323232;
+$palette-gray500: #646464;
+$palette-gray400: #7D7D7D;
+$palette-gray300: #B0B0B0;
+$palette-gray100: #F5F5F5;
+$palette-white: #ffffff;
+$palette-blue900: #001E62;
+$palette-blue700: #2D5596;
+$palette-blue600: #507AA8;
+$palette-blue500: #007eb0;//#001E62;
+$palette-blue400: #41B6E6;
+$palette-blue300: #52AEDC;
+$palette-yellow400: #FFBF3F;
+$palette-red400: #D50032;
+
+
+:root {
+    color-scheme: light only;
+}
+
+.uic-bg--black {
+    background: $palette-black
+}
+.uic-bg--black {
+    background: $palette-black
+}
+
+.uic-color--black { color: $palette-black; }
+.uic-color--gray700 { color: $palette-gray700; }
+.uic-color--gray500 { color: $palette-gray500; }
+.uic-color--gray400 { color: $palette-gray400; }
+.uic-color--gray300 { color: $palette-gray300; }
+.uic-color--gray100 { color: $palette-gray100; }
+.uic-color--white { color: $palette-white; }
+.uic-color--blue900 { color: $palette-blue900; }
+.uic-color--blue700 { color: $palette-blue700; }
+.uic-color--blue600 { color: $palette-blue600; }
+.uic-color--blue500 { color: $palette-blue500; }
+.uic-color--blue400 { color: $palette-blue400; }
+.uic-color--blue300 { color: $palette-blue300; }
+.uic-color--yellow400 { color: $palette-yellow400; }
+.uic-color--red400 { color: $palette-red400; }
+
+.uic-bg--black { background-color: $palette-black; }
+.uic-bg--gray700 { background-color: $palette-gray700; }
+.uic-bg--gray500 { background-color: $palette-gray500; }
+.uic-bg--gray400 { background-color: $palette-gray400; }
+.uic-bg--gray100 { background-color: $palette-gray100; }
+.uic-bg--white { background-color: $palette-white; }
+.uic-bg--blue900 { background-color: $palette-blue900; }
+.uic-bg--blue700 { background-color: $palette-blue700; }
+.uic-bg--blue600 { background-color: $palette-blue600; }
+.uic-bg--blue500 { background-color: $palette-blue500; }
+.uic-bg--blue400 { background-color: $palette-blue400; }
+.uic-bg--blue300 { background-color: $palette-blue300; }
+.uic-bg--yellow400 { background-color: $palette-yellow400; }
+.uic-bg--red400 { background-color: $palette-red400; }

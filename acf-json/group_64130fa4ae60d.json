@@ -1,0 +1,156 @@
+{
+    "key": "group_64130fa4ae60d",
+    "title": "video-hero",
+    "fields": [
+        {
+            "key": "field_6426fc340dc8e",
+            "label": "",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "<h2 style=\"line-height: 0;letter-spacing: 0.5px;\">Video Hero<\/h2>",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_64130fa58da85",
+            "label": "Section Label",
+            "name": "section_label",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_64130fd48da86",
+            "label": "Header Text",
+            "name": "header_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_64130ff68da87",
+            "label": "Hero Text",
+            "name": "hero_text",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "explore": "Explore",
+                "discover": "Discover",
+                "become": "Become",
+                "connect": "Connect"
+            },
+            "default_value": "explore",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_641310348da88",
+            "label": "Video",
+            "name": "vimeo_id",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "<b>specify the vimeo video id or url similar to one of the following:<\/b> <br \/>\r\nhttps:\/\/vimeo.com\/<b style=\"color: red;\">805660471<\/b><br \/>\r\nhttps:\/\/player.vimeo.com\/video\/<b style=\"color: red;\">805660471<\/b>?h=cc7472954e&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\r\n<br \/>\r\nhttps:\/\/vimeo.com\/<b style=\"color: red;\">805660471<\/b>?embedded=true&source=video_title&owner=193764939",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_641312be8da89",
+            "label": "Thumbnail",
+            "name": "thumbnail",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/video-hero"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1684435115
+}

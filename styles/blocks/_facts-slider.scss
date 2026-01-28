@@ -1,0 +1,50 @@
+// Facts Slider
+//
+// Markup: ../../styleguide/blocks/facts-slider.hbs
+//
+// Styleguide Blocks.Facts Slider
+
+.uic-facts-slider {
+    color: $palette-white;
+    background-color: $palette-red400;
+
+    & .uic-section__inner {
+        padding-top: 125px;
+        padding-bottom: 38.32px;
+    }
+
+    & .uic-section__inner > .uic-h3 {
+        text-align: center;
+        margin-bottom: 29.3px;
+    }
+
+    &__fact {
+        padding: 8px;
+        display: flex;
+        flex: 0 1 auto;
+        align-items: center;
+        text-transform: uppercase;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        &__text--normal {
+            @extend .uic-text--base;
+        }
+        &__text--focus {
+            font-size: 2.1875rem; // 35px;
+            line-height: 120%;
+            font-weight: 900;
+            font-family: $font--secondary;
+        }
+        &__citation {
+            margin-top: 25.31px;
+            font-weight: 500;
+            font-size: 1.188rem; // 19px;
+            line-height: 1.392rem; // 22.27px;
+            font-style: italic;
+            text-align: center;
+        }
+    }
+}

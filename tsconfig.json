@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "target": "ESNExt",
+        "module": "ESNext",
+        "jsx": "preserve",
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "rootDir": ".",
+        "baseUrl": ".",
+        "declaration": true,
+        "strictNullChecks": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "allowUnusedLabels": false,
+        "resolveJsonModule": true,
+        "noImplicitReturns": true,
+        "noUnusedParameters": false,
+        "lib": [
+            "ESNext",
+            "dom",
+            "dom.iterable"
+        ],
+        "pretty": true
+    },
+    "include": [
+        "scripts",
+        "stubs"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

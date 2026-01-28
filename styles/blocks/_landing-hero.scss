@@ -1,0 +1,368 @@
+// Hero
+//
+// Markup: ../../styleguide/blocks/hero.hbs
+//
+// Styleguide Blocks.Hero
+
+@keyframes uic-hero-mask {
+    from {
+        -webkit-mask-position: 0% 0;
+        mask-position: 0% 0;
+    }
+    to {
+        -webkit-mask-position: 100% 0;
+        mask-position: 100% 0;
+    }
+}
+
+.uic {
+    --uic-hero__logo--size: 125px;
+    --uic-landing-hero--height: 700px;
+}
+
+.uic-landing-hero {
+    height: var(--uic-landing-hero--height);
+    width: 100%;
+    position: relative;
+
+    &__text-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+
+        //
+        margin-top: 110px;
+
+        width: 100%;
+        // Adjust this value as needed, maybe to match your main content width
+        max-width: 100%;
+        min-width: 345.015px;
+    }
+
+    // refers to svg text
+    &__text {
+        z-index: 111;
+        max-width: 717px;
+        height: auto;
+        flex-direction: column;
+        gap: -157px;
+
+        // double check
+        width: clamp(345.015px, 67.5vw, 717px);
+    }
+
+    &__heading {
+        z-index: 111;
+        display: flex;
+        flex-shrink: 0;
+        justify-content: center;
+        align-items: center;
+
+        width: 645px;
+        height: 146px;
+
+        color: $palette-white;
+        text-align: center;
+
+        font-family: Jost;
+        font-size: var(--Heading-font-size-heading-md, 50px);
+        font-style: normal;
+        font-weight: 700;
+        line-height: var(--Heading-line-heaight-heading-md, 58px);
+        text-transform: uppercase;
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__background {
+        z-index: 0;
+        /* hide overflow from text scale transform animation */
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        color: #fff;
+        background-size: cover;
+        background-position: center;
+        filter: unset;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    // OLD
+
+    &__logo {
+        margin-top: var(--uic-navbar--margin-top);
+        width: var(--uic-hero__logo--size);
+        height: var(--uic-hero__logo--size);
+    }
+
+    &__overlay {
+        z-index: 100;
+
+        & .uic-section__inner {
+            height: var(--uic-landing-hero--height);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+    }
+
+    &__overlay,
+    &__background {
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    &__text {
+        /**
+         * Values are broken out here and assigned later in modifier classes (ie: &--discover)
+         * so we can use these variables to find the widest viewBox programmatically
+         * @see --uic-hero__text--max-width and --uic-hero__text--scale and 
+         */
+        --uic-hero__text--discover--width: 848.9;
+        --uic-hero__text--discover--height: 146.4;
+        --uic-hero__text--discover--o-offset-x: 445.75;
+        --uic-hero__text--discover--o-offset-y: 73.1513;
+        --uic-hero__text--discover--aspect-ratio: calc(
+            var(--uic-hero__text--discover--width) /
+                var(--uic-hero__text--discover--height)
+        );
+
+        --uic-hero__text--become--width: 677;
+        --uic-hero__text--become--height: 146.4;
+        --uic-hero__text--become--o-offset-x: 370.85;
+        --uic-hero__text--become--o-offset-y: 73.1513;
+        --uic-hero__text--become--aspect-ratio: calc(
+            var(--uic-hero__text--become--width) /
+                var(--uic-hero__text--become--height)
+        );
+
+        --uic-hero__text--explore--width: 736.9;
+        --uic-hero__text--explore--height: 146.4;
+        --uic-hero__text--explore--o-offset-x: 467.85;
+        --uic-hero__text--explore--o-offset-y: 73.1513;
+        --uic-hero__text--explore--aspect-ratio: calc(
+            var(--uic-hero__text--explore--width) /
+                var(--uic-hero__text--explore--height)
+        );
+
+        --uic-hero__text--connect--width: 789.8;
+        --uic-hero__text--connect--height: 146.4;
+        --uic-hero__text--connect--o-offset-x: 177.05;
+        --uic-hero__text--connect--o-offset-y: 73.1513;
+        --uic-hero__text--connect--aspect-ratio: calc(
+            var(--uic-hero__text--connect--width) /
+                var(--uic-hero__text--connect--height)
+        );
+
+        // these are just copied values, needed but overwritten anyway
+        --uic-hero__text--afford--width: 789.8;
+        --uic-hero__text--afford--height: 146.4;
+        --uic-hero__text--afford--o-offset-x: 177.05;
+        --uic-hero__text--afford--o-offset-y: 73.1513;
+        --uic-hero__text--afford--aspect-ratio: calc(
+            var(--uic-hero__text--afford--width) /
+                var(--uic-hero__text--afford--height)
+        );
+
+        /* 
+        The media queries for each of these has a dummy value 
+        which overrides the variable to center the svg reliably.
+        You can delete these media queries to have the svg center itself based
+        on the "o" of each word.
+        */
+        &--discover {
+            --uic-hero__text--width: var(--uic-hero__text--discover--width);
+            --uic-hero__text--height: var(--uic-hero__text--discover--height);
+            --uic-hero__text--aspect-ratio: var(
+                --uic-hero__text--discover--aspect-ratio
+            );
+            --uic-hero__text--o-offset-x: var(
+                --uic-hero__text--discover--o-offset-x
+            );
+            --uic-hero__text--o-offset-y: var(
+                --uic-hero__text--discover--o-offset-y
+            );
+            @media (max-width: 10000px) {
+                // Change it again for even smaller screens
+                --uic-hero__text--o-offset-x: 50px;
+            }
+        }
+        &--become {
+            --uic-hero__text--width: var(--uic-hero__text--become--width);
+            --uic-hero__text--height: var(--uic-hero__text--become--height);
+            --uic-hero__text--aspect-ratio: var(
+                --uic-hero__text--become--aspect-ratio
+            );
+            --uic-hero__text--o-offset-x: var(
+                --uic-hero__text--become--o-offset-x
+            );
+            --uic-hero__text--o-offset-y: var(
+                --uic-hero__text--become--o-offset-y
+            );
+            @media (max-width: 10000px) {
+                // Change it again for even smaller screens
+                --uic-hero__text--o-offset-x: 50px;
+            }
+        }
+        &--explore {
+            --uic-hero__text--width: var(--uic-hero__text--explore--width);
+            --uic-hero__text--height: var(--uic-hero__text--explore--height);
+            --uic-hero__text--aspect-ratio: var(
+                --uic-hero__text--explore--aspect-ratio
+            );
+            --uic-hero__text--o-offset-x: var(
+                --uic-hero__text--explore--o-offset-x
+            );
+            --uic-hero__text--o-offset-y: var(
+                --uic-hero__text--explore--o-offset-y
+            );
+            @media (max-width: 10000px) {
+                // Change it again for even smaller screens
+                --uic-hero__text--o-offset-x: 50px;
+            }
+        }
+        &--connect {
+            --uic-hero__text--width: var(--uic-hero__text--connect--width);
+            --uic-hero__text--height: var(--uic-hero__text--connect--height);
+            --uic-hero__text--aspect-ratio: var(
+                --uic-hero__text--connect--aspect-ratio
+            );
+            --uic-hero__text--o-offset-x: var(
+                --uic-hero__text--connect--o-offset-x
+            );
+            --uic-hero__text--o-offset-y: var(
+                --uic-hero__text--connect--o-offset-y
+            );
+            @media (max-width: 10000px) {
+                // Change it again for even smaller screens
+                --uic-hero__text--o-offset-x: 50px;
+            }
+        }
+
+        &--afford {
+            --uic-hero__text--width: var(--uic-hero__text--afford--width);
+            --uic-hero__text--height: var(--uic-hero__text--afford--height);
+            --uic-hero__text--aspect-ratio: var(
+                --uic-hero__text--afford--aspect-ratio
+            );
+            --uic-hero__text--o-offset-x: var(
+                --uic-hero__text--afford--o-offset-x
+            );
+            --uic-hero__text--o-offset-y: var(
+                --uic-hero__text--afford--o-offset-y
+            );
+            @media (max-width: 10000px) {
+                // Change it again for even smaller screens
+                --uic-hero__text--o-offset-x: 50px;
+            }
+        }
+
+        // center the hero text around the "O" based on it's offsets
+        --uic-hero__text--center-x: calc(var(--uic-hero__text--width) / 2);
+        --uic-hero__text--delta-x: calc(
+            var(--uic-hero__text--o-offset-x) / var(--uic-hero__text--width)
+        );
+        --uic-hero__text--delta-x-percent: calc(
+            0.5 - var(--uic-hero__text--delta-x)
+        );
+        transform: translateX(
+            calc(var(--uic-hero__text--delta-x-percent) * 100%)
+        );
+        transform-origin: calc(
+                50% - (var(--uic-hero__text--delta-x-percent)) * 100%
+            )
+            center;
+        overflow: hidden;
+        .uic-hero:not(.uic-hero--no-zoom) & {
+            transition: transform
+                calc(var(--uic-hero__slider--transition-duration) * 0.75)
+                cubic-bezier(0.37, 0, 0.63, 1);
+        }
+        .uic-hero:not(.uic-hero--no-zoom) .uic-hero__slider__item--exiting & {
+            transform: translateX(
+                    calc(var(--uic-hero__text--delta-x-percent) * 100%)
+                )
+                scale(1.6);
+        }
+
+        /**
+         * get a scaling factor using this hero text's aspect-ratio in proportion to the
+         * largest aspect ratio (widest svg) of all the hero texts. This makes it possible
+         * to maintain a constant height while still using a % based width;
+         */
+        --uic-hero__text--scale: calc(
+            var(--uic-hero__text--aspect-ratio) /
+                max(
+                    var(--uic-hero__text--discover--aspect-ratio),
+                    var(--uic-hero__text--become--aspect-ratio),
+                    var(--uic-hero__text--explore--aspect-ratio),
+                    var(--uic-hero__text--connect--aspect-ratio)
+                )
+        );
+        width: calc(67.5% * var(--uic-hero__text--scale));
+    }
+}
+
+@media screen and (min-width: 1366px) {
+    .uic-landing-hero {
+        height: 90vh;
+    }
+}
+@media screen and (max-width: 767px) {
+    .uic-landing-hero {
+        height: 400px;
+    }
+}
+
+@media (max-width: $bp-desktop) {
+    .uic-landing-hero__text-container {
+        display: flex;
+        padding: 307px 24px 307px 24px;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 32px;
+        flex-shrink: 0;
+    }
+
+    .uic-landing-hero__text {
+        min-width: none;
+        min-height: none;
+        flex-shrink: 0;
+        padding-left: var(--uic-hero__text--become--width);
+    }
+}
+@media (max-width: $bp-tablet) {
+    .uic-landing-hero__heading {
+        font-size: 36px;
+        line-height: 44px;
+
+        width: 332px;
+        height: 146px;
+    }
+
+    .uic-landing-hero__text-container {
+        gap: 12px;
+    }
+}
+
+@media (max-width: $bp-mobile) {
+    .uic-landing-hero__text-container {
+        margin-top: 40px;
+    }
+}

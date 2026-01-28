@@ -1,0 +1,33 @@
+{{#if prototype.isPrototype}}
+    {{> @partial-block}}
+{{else}}
+    {{#if forcePrototype}}
+        {{> @partial-block }}
+    {{else}}
+        {{#if toggle}}
+            {{#if toggleOpen}}
+                <details open>
+            {{else}}
+                <details>
+            {{/if}}
+                {{#if description}}
+                    <summary class="uic-styleguide__showcase__summary">{{ description }}</summary>
+                {{else}}
+                    <summary class="uic-styleguide__showcase__summary">hide/show</summary>
+                {{/if}}
+                
+                <div class="uic uic-styleguide__showcase {{ extraClass }}">
+                    {{#> @partial-block }}
+                    {{/@partial-block}}
+                </div>
+            </details>
+        {{else}}
+            {{#if description}}
+                <summary class="uic-styleguide__showcase__summary">{{ description }}</summary>
+            {{/if}}
+            <div class="uic uic-styleguide__showcase {{ extraClass }}">
+                {{> @partial-block }}
+            </div>
+        {{/if}}
+    {{/if}}
+{{/if}}

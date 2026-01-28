@@ -1,0 +1,199 @@
+// Footer
+//
+// Markup: ../../styleguide/blocks/footer.hbs
+//
+// Styleguide Blocks.Footer
+
+.uic-footer {
+    background: $palette-blue900;
+    color: $palette-white;
+
+
+    & .uic-section__inner {
+        display: grid;
+        column-gap: 26.95px;
+        grid-template-areas: "logo ."
+                             "addresses nav";
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &__logo {
+        grid-area: logo;
+        padding-top: 22px;
+        padding-bottom: 22px;
+
+        & img {
+            height: 68.65px;
+        }
+    }
+
+    &__addresses {
+        @extend .uic-text--sm;
+        padding-top: 22px;
+        padding-bottom: 32.85px;
+        grid-area: addresses;
+        border-top: 1px solid $palette-white;
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    &__address__title {
+        letter-spacing: 0.04em;
+    }
+
+    &__nav {
+        grid-area: nav;
+        border-top: 1px solid $palette-white;
+
+        &__items {
+            display: flex;
+            height: min-content;
+            align-items: flex-start;
+            justify-content: space-between;
+            overflow-y: hidden;
+            margin-bottom: 17.89px;
+        }
+
+        &__item {
+            position: relative;
+            
+            &, & a {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            & a {                  
+                padding: 22px 0;
+                text-decoration: none;
+                color: $palette-white;
+                text-transform: uppercase;
+                transition: color 333ms ease;
+            }
+
+            &-text {
+                font-size: 1.0625rem; // 17px;
+                line-height: 1.245rem; // 19.92px;
+            }
+
+            &::after {
+                content: " ";
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 8px;
+                overflow: hidden;
+                position: absolute;
+                transform: translateY(8px);
+                transition: transform 333ms ease;
+                background-color: $palette-red400;
+            }
+    
+            &:hover::after {
+                transform: translateY(0px);
+            }
+        }
+    }
+    &__social {
+        display: flex;
+        gap: 16.47px;
+        justify-content: flex-end;
+        &__link {
+            height: 46.77px;
+            width: 46.77px;
+            transition: opacity 333ms ease, transform 333ms ease-out;
+            & img {
+                height: 100%;
+                width: 100%;;
+            }
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .uic-footer {
+        & .uic-section__inner {
+            grid-template-areas: "logo logo"
+                                 "addresses nav";
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        &__logo {
+            padding-top: 12px;
+            padding-bottom: 10px;
+            & img {
+                height: 40px;
+            }
+        }
+        &__addresses {
+            grid-template-columns: 1fr;
+            padding-top: 9px;
+            row-gap: 15px;
+        }
+        &__nav {
+            &__item {
+                padding: 0;
+                margin-left: -4px;
+                display: flex;
+                overflow: visible;
+                
+                &::after {
+                    width: 8px;
+                    height: 100%;
+                    z-index: 10;
+                    transform: translateX(0px);
+                    transition: transform 333ms ease;
+                }
+                
+                &:hover::after {
+                    transform: translateX(-8px);
+                    width: 8px;
+                }
+                
+
+                & a {
+                   padding: 0;
+                   
+                } 
+                &-text {
+                    background: $palette-blue900;
+                    position: relative;
+                    padding: 10px 4px;
+                    z-index: 20;
+                }
+            }
+            &__items {
+                padding-top: 5px;
+                padding-bottom: 28px;
+                flex-direction: column;
+                overflow: visible; /** overflow-x doesn't seem to work alone... */
+            }
+        }
+        &__social {
+            border-top: 1px solid $palette-white;
+            padding-top: 9px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 9px;
+            
+            &__link {
+                height: 42px;
+                width: 42px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 359px) {
+    .uic-footer {
+        &__social {
+            &__link {
+                height: 36px;
+                width: 36px;
+            }
+        }
+    }
+}

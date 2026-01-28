@@ -1,0 +1,132 @@
+// Video Modal
+//
+// Markup: ../../styleguide/components/video-modal.hbs
+//
+// Styleguide Components.Video Modal
+
+
+.uic {
+    --uic-video-modal__close-button-size: 32px;
+    --uic-video-modal__close-button-margin: 8px;
+    --uic-video-modal__gap: calc(var(--uic-video-modal__close-button-size) + (var(--uic-video-modal__close-button-margin) * 2));
+}
+
+.uic-video-modal {
+
+    &__trigger {
+        .uic-video-slider__card__title & {
+            flex-direction: column;
+            text-decoration: none;
+        }
+    }
+
+    &__container  {
+
+        & .bp-inner {
+            aspect-ratio: var(--uic-video-modal--width) / var(--uic-video-modal--height);
+            top: var(--uic-video-modal__gap);
+            left: var(--uic-video-modal__gap);
+            height: calc(100%  - (2 * var(--uic-video-modal__gap)));
+            width: calc(100%  - (2 * var(--uic-video-modal__gap)));
+            align-items: center;
+            justify-content: center;
+        }
+
+        & .bp-if {
+            background: unset;
+            position: relative;//static;
+            aspect-ratio: var(--uic-video-modal--width) / var(--uic-video-modal--height);
+            
+            // hack to throw away inline style from `big-picture` because that breaks out aspect ratio
+            &[style] {
+                width: min(
+                    calc((100vmin - (2 * var(--uic-video-modal__gap))) * (var(--uic-video-modal--width) / var(--uic-video-modal--height))),
+                    calc(100vw - (2 * var(--uic-video-modal__gap)))
+                ) !important;
+                height: min(
+                    calc((100vw - (2 * var(--uic-video-modal__gap))) *  (var(--uic-video-modal--height) / var(--uic-video-modal--width))),
+                    calc(100vh - (2 * var(--uic-video-modal__gap)))
+                ) !important;
+                // calc((100vmin - (2 * var(--uic-video-modal__gap))) *  (var(--uic-video-modal--width) / var(--uic-video-modal--height))),
+                // see media query at the end of the file for vertical screen support
+            }
+
+            & iframe {
+                position: unset;
+            }
+
+            & .bp-load {
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            & .bp-bar {
+                height: 4px;
+                background: rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        & .bp-controls {
+            & .bp-x {
+                top: var(--uic-video-modal__close-button-margin);
+                right: var(--uic-video-modal__close-button-margin);
+                width: var(--uic-video-modal__close-button-size);
+                height: var(--uic-video-modal__close-button-size);
+                border-radius: 0;
+        
+                &:before {
+                    width: calc(0.75 * var(--uic-video-modal__close-button-size));
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    height: calc(0.75 * var(--uic-video-modal__close-button-size));
+                }
+                background-color: rgba(0, 0, 0, 0.4);
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.33);
+                }
+            }
+        }
+    }
+}
+
+@media screen and (orientation: landscape) and (max-width: 959px) and (pointer: coarse) {
+    .uic {
+        --uic-video-modal__close-button-size: 24px;
+        --uic-video-modal__close-button-margin: 4px;
+    }
+}
+
+@media screen and (max-aspect-ratio: 1 / 1) {
+    .uic-video-modal__container .bp-if[style] { 
+        width: calc(100vw - (2 * var(--uic-video-modal__gap))) !important;
+        height: calc((100vw - (2 * var(--uic-video-modal__gap))) * (var(--uic-video-modal--height) / var(--uic-video-modal--width))) !important;
+    }
+}
+
+
+@media screen and (max-aspect-ratio: 1 / 1) and (max-width: 479px),
+       screen and (orientation: landscape) and (max-width: 539px) {
+    .uic-video-modal__container .bp-if[style] {
+        width: calc(100% - 2 * var(--uic-video-modal__gap));
+    }
+    .uic-video-modal__container .bp-inner {
+        width: calc(100% - 2 * var(--uic-video-modal__gap));
+    }
+}   
+
+
+@media screen and (min-aspect-ratio: 1 / 1) and (max-width: 479px),
+       screen and (orientation: portrait) and (max-width: 539px),
+       screen and (max-width: 379px) {
+    
+    .uic {
+        --uic-video-modal__gap: 0px;
+    }
+    .uic-video-modal__container .bp-if[style] {
+        width: 100% !important; 
+        height: auto !important;
+    }
+}

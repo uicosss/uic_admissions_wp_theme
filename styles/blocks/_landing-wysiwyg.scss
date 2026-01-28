@@ -1,0 +1,174 @@
+.uic-aid {
+    padding: 80px 80px 0px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: stretch;
+
+    color: $palette-white;
+
+    // Color Choices (background)
+    &__red {
+        background: $palette-red400;
+    }
+    &__white {
+        background: $palette-white;
+    }
+    &__dark-blue {
+        background: $palette-blue900;
+    }
+    &__mid-blue {
+        background: $palette-blue700;
+    }
+    &__light-blue {
+        background: $palette-blue400;
+    }
+
+    &__wysiwyg {
+        margin-bottom: 32px;
+
+        text-align: center;
+        align-self: stretch;
+
+        font-family: Roboto;
+        font-style: normal;
+        font-size: var(--Body-font-size-body-reg, 27px);
+        line-height: var(--Body-line-height-body-reg, 41px);
+        font-size: var(--Body-font-size-body-reg, 27px);
+
+        &__container {
+            max-width: 1004px;
+            justify-self: center;
+            align-self: center;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-size: var(--Heading-font-size-heading-sm, 35px);
+            font-weight: 500;
+            line-height: var(
+                --Heading-line-height-heading-sm,
+                43px
+            ); /* 122.857% */
+            margin-bottom: 32px;
+        }
+        p {
+            font-weight: 400;
+            text-align: start;
+        }
+        strong,
+        b {
+            font-weight: 700;
+            text-align: start;
+        }
+        a {
+            color: $palette-yellow400;
+
+            font-weight: 700;
+            text-decoration-line: underline;
+            text-decoration-style: solid;
+            text-decoration-skip-ink: none;
+            text-decoration-thickness: auto;
+            text-underline-offset: auto;
+            text-underline-position: from-font;
+            text-align: start;
+        }
+    }
+
+    &__link-container {
+        margin-bottom: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__cta-link {
+        color: $palette-yellow400;
+        text-align: center;
+
+        /* UIC Design System/Mobile/Buttons/btn-cta, Black */
+        font-family: Roboto;
+        font-size: var(--Button-font-size-button-text, 20px);
+        font-style: normal;
+        font-weight: 900;
+        line-height: var(--Button-line-height-button-text, 26px); /* 130% */
+        text-transform: uppercase;
+        text-decoration: none;
+
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        flex-basis: 0;
+
+        // from feedback
+        border: 3px solid #ffbf3f;
+        padding: 4px 8px;
+        margin-bottom: 6px;
+
+        gap: var(--spacing-8, 8px);
+
+        &__arrow {
+            width: 15px;
+            height: 15px;
+            text-decoration: inherit;
+
+            background-image: url("../images/landing-arrow.svg");
+            background-repeat: no-repeat;
+            transition: transform 333ms ease;
+        }
+    }
+
+    &__code {
+        text-align: center;
+
+        /* UIC Design System/Desktop/Body/body-xs, Regular */
+        font-family: Roboto;
+        font-size: var(--Body-font-size-body-xs, 20px);
+        font-style: normal;
+        font-weight: 400;
+        line-height: var(--Body-line-height-body-xs, 26px); /* 130% */
+    }
+}
+
+a.uic-aid__cta-link {
+    & .uic-aid__cta-link__arrow {
+        display: inline-block;
+    }
+    &:hover {
+        & .uic-aid__cta-link__arrow {
+            transform: translateX(4px);
+        }
+    }
+}
+
+@media (max-width: $bp-tablet) {
+    .uic-aid {
+        padding: 80px 24px 0px;
+    }
+    .uic-aid__wysiwyg {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-size: 28px;
+            line-height: 26px; /* 118.182% */
+        }
+        p,
+        strong,
+        b,
+        a {
+            font-size: 22px;
+            line-height: 30px;
+        }
+    }
+    .uic-aid__cta-link {
+        font-size: var(--Button-font-size-button-text, 16px);
+        line-height: var(--Button-line-height-button-text, 19px); /* 118.75% */
+    }
+}

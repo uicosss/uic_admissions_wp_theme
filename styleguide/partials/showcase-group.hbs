@@ -1,0 +1,32 @@
+{{#if prototype.isPrototype}}
+    {{#ifEquals showcaseIndex "0" }}{{#> showcase0 }}{{/showcase0}}{{/ifEquals}}
+    {{#ifEquals showcaseIndex "1" }}{{#> showcase1 }}{{/showcase1}}{{/ifEquals}}
+    {{#ifEquals showcaseIndex "2" }}{{#> showcase2 }}{{/showcase2}}{{/ifEquals}}
+    {{#ifEquals showcaseIndex "3" }}{{#> showcase3 }}{{/showcase3}}{{/ifEquals}}
+    {{#ifEquals showcaseIndex "4" }}{{#> showcase4 }}{{/showcase4}}{{/ifEquals}}
+    {{#ifEquals showcaseIndex "5" }}{{#> showcase5 }}{{/showcase5}}{{/ifEquals}}
+    {{#ifEquals showcaseIndex "6" }}{{#> showcase6 }}{{/showcase6}}{{/ifEquals}}
+    {{#ifEquals showcaseIndex "7" }}{{#> showcase7 }}{{/showcase7}}{{/ifEquals}}
+{{else}}
+    {{#if forcePrototype}}
+        {{#ifEquals showcaseIndex "0" }}{{#> showcase0 }}{{/showcase0}}{{/ifEquals}}
+        {{#ifEquals showcaseIndex "1" }}{{#> showcase1 }}{{/showcase1}}{{/ifEquals}}
+        {{#ifEquals showcaseIndex "2" }}{{#> showcase2 }}{{/showcase2}}{{/ifEquals}}
+        {{#ifEquals showcaseIndex "3" }}{{#> showcase3 }}{{/showcase3}}{{/ifEquals}}
+        {{#ifEquals showcaseIndex "4" }}{{#> showcase4 }}{{/showcase4}}{{/ifEquals}}
+        {{#ifEquals showcaseIndex "5" }}{{#> showcase5 }}{{/showcase5}}{{/ifEquals}}
+        {{#ifEquals showcaseIndex "6" }}{{#> showcase6 }}{{/showcase6}}{{/ifEquals}}
+        {{#ifEquals showcaseIndex "7" }}{{#> showcase7 }}{{/showcase7}}{{/ifEquals}}
+    {{else}}
+        <div class="uic uic-styleguide__showcase-group {{ extraClass }}">
+            {{#> showcase0 }}{{/showcase0}}
+            {{#> showcase1 }}{{/showcase1}}
+            {{#> showcase2 }}{{/showcase2}}
+            {{#> showcase3 }}{{/showcase3}}
+            {{#> showcase4 }}{{/showcase4}}
+            {{#> showcase5 }}{{/showcase5}}
+            {{#> showcase6 }}{{/showcase6}}
+            {{#> showcase7 }}{{/showcase7}}
+        </div>
+    {{/if}}
+{{/if}}

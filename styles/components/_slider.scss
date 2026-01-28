@@ -1,0 +1,246 @@
+// Slider
+//
+// Markup: ../../styleguide/components/slider.hbs
+//
+// Styleguide Components.Slider
+
+/**
+ * Glide requires we have a dot for each slide.
+ * Because we want to show one dot per "page", 
+ * we need to selectively hide them based on the current index
+ */
+ @mixin dotVisibility($activeIndex, $offset, $chunkSize) {
+    &[data-active-slide="#{$activeIndex}"] {
+        // a dot in this group is active, don't show the first of the group unless
+        // it's the active one, in which case we add no rules because the first
+        // of the group is visible by default
+        @if $activeIndex != $offset { 
+            & .uic-slider__dot[data-glide-dir="=#{$offset}"] {
+                display: none;
+            }
+            // let explicitly show the active dot
+            & .uic-slider__dot[data-glide-dir="=#{$activeIndex}"] {
+                display: block;
+            }
+        }
+    }
+}
+@mixin chunkDots($chunkSize, $chunkCount) {
+    @for $i from 0 to $chunkCount {
+        // show the first dot in the group by default
+        & .uic-slider__dot[data-glide-dir="=#{$i*$chunkSize}"] {
+            display: block;
+        }
+    }
+    @for $i from 0 to ($chunkSize * $chunkCount) {
+        @include dotVisibility($i, ($i - ($i % $chunkSize)), $chunkSize)
+    }
+}
+
+.uic-slider {
+    --uic-slider__dots--size: 10px;
+    --uic-slider__dots--margin-before: 36.17px;
+    --uic-slider__dots--container-height: calc(
+        var(--uic-slider__dots--size) +
+        var(--uic-slider__dots--margin-before) +
+        var(--uic-slider__dots--margin-after)
+    );
+    --uic-slider__arrow--width: 30.42px;
+    --uic-slider__arrow--height: 55.06px;
+    --uic-slider__arrow--gutter: 0;
+    --uic-slider__arrow--side-offset: 15px;
+    --uic-slider__arrow--side-offset: 15px;
+    --uic-slider__arrow--top-offset: calc(50% - (var(--uic-slider__arrow--height)/2));
+    --uic-slider__box-container--padding: 4px;
+    --uic-slider__box-container--border-width: 2px;
+    --uic-slider__box--padding: 8px;
+    --uic-slider__box--border-width: 2px;
+
+
+    margin: 0 var(--uic-slider__arrow--gutter);
+    
+    &__track-container {
+        position: relative;
+    }
+
+    &__track {
+        overflow: hidden;
+    }
+
+    &__items {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__prev, &__next {
+        color: $palette-white;
+        &, & svg{ 
+            width: var(--uic-slider__arrow--width);
+            height: var(--uic-slider__arrow--height);
+        }
+
+        position: absolute;
+        cursor: pointer;
+        z-index: 300;
+        top: var(--uic-slider__arrow--top-offset);
+        transition: transform 333ms ease-out;
+    }
+
+    &__prev {
+        left:  calc(-1 * (var(--uic-slider__arrow--width) + var(--uic-slider__arrow--side-offset)));
+
+        &:hover {
+            transform: translateX(-8px);
+        }
+
+    }
+    &__next {
+        right: calc(-1 * (var(--uic-slider__arrow--width) + var(--uic-slider__arrow--side-offset)));
+
+        &:hover {
+            transform: translateX(8px);
+        }
+    }
+    
+    &[data-at-start] &__prev {
+        display: none;
+    }
+
+    &[data-at-end] &__next {
+        display: none;
+    }
+
+    &__dot {
+        margin-top: var(--uic-slider__dots--margin-before);
+        height: var(--uic-slider__dots--size);
+        width: var(--uic-slider__dots--size);
+        cursor: pointer;
+        color: transparent;
+        font-weight: 500;
+        background: url('../images/slider/slider-dot-empty.svg');
+
+        display: none;
+
+        &.glide__bullet--active {
+            cursor: default;
+            background: url('../images/slider/slider-dot-filled.svg');
+        }         
+    }
+
+    &--inverted {
+        & .uic-slider {
+            &__prev, &__next {
+                color: $palette-gray300;
+            }
+            &__dot {
+                background: url('../images/slider/slider-dot-empty-gray.svg');
+                &.glide__bullet--active {
+                    cursor: default;
+                    background: url('../images/slider/slider-dot-filled-gray.svg');
+                }         
+            }
+        }
+    }
+
+    &__dots {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        &__square {
+            aspect-ratio: 1 / 1;
+        }
+    }
+
+    &__card {
+        display: flex;
+        & .uic-video-modal__trigger {
+            display: flex;
+            flex-direction: column;
+            &, &:visited {
+                color: inherit;
+                text-decoration: none;
+                transition: color 333ms ease;
+            }
+
+            &:hover {
+                color: #000;
+            }
+        }
+
+        &__media {
+            aspect-ratio: 365 / 225;
+            max-width: 100%;;
+        }
+        &__title {
+            font-weight: 700;
+            @extend .uic-text--lg;
+            margin-top: 24px;
+        }
+        &__text {
+            margin-top: 19px;
+            @extend .uic-text--lg;
+        }
+    
+        &__title ~ &__text, & .uic-video-modal__trigger ~ &__text {
+            margin-top: 0px;
+        }
+    }
+
+    &__box {
+        aspect-ratio: 1 / 1;
+        box-sizing: border-box;
+        border: var(--uic-slider__box--border-width) solid #fff;
+        // width: calc(100% - (2 * (var(--uic-slider__box--border-width) + var(--uic-slider__box--padding))));
+    }
+    
+    &__box-container {
+        padding: 4px;
+        display:  block;
+        max-width: 100%;
+        flex-direction: column;
+        box-sizing: border-box;
+        border: var(--uic-slider__box-container--border-width) solid #fff;
+        width: 100%;
+        // width: calc(100% - (2 * (var(--uic-slider__box-container--border-width) + var(--uic-slider__box-container--padding))));
+    }
+
+
+    &:not([data-max-page-size="3"]) {
+        &[data-page-size="4"] {
+            @include chunkDots(4, 6);
+        }
+        &[data-page-size="3"] {
+            @include chunkDots(3, 8);
+        }
+        &[data-page-size="2"] {
+            @include chunkDots(2, 12);
+        }
+        &[data-page-size="1"] .uic-slider__dot {
+            display: block;
+        }
+    }
+    &[data-max-page-size="3"] {
+        &[data-page-size="3"] {
+            @include chunkDots(3, 8);
+        }
+        &[data-page-size="2"] {
+            @include chunkDots(2, 12);
+        }
+        &[data-page-size="1"] .uic-slider__dot {
+            display: block;
+        }
+    }
+}
+
+@media screen and (max-width: 799px) {
+    .uic-slider {
+        --uic-slider__arrow--side-offset: -22px;
+        --uic-slider__arrow--gutter: 11px;
+    }
+}

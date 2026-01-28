@@ -1,0 +1,89 @@
+// FAB
+//
+// Markup: ../../styleguide/components/fab.hbs
+//
+// Styleguide Components.FAB
+
+.uic {
+    --uic-fab--offset-base: 26px;
+    --uic-fab--top-offset: var(--uic-fab--offset-base);
+    --uic-fab--right-offset: calc(
+        Max(
+                var(--uic-section__container--margin),
+                ((100% - var(--uic-section__container--max-width--wrapped)) / 2)
+            ) + var(--uic-section__inner--padding)
+    );
+    --uic-fab--size: 71px;
+    --uic-fab--page-offset: calc(
+        -1 * (var(--uic-navbar--margin-top) + var(--uic-navbar--height) +
+                    var(--uic-fab--top-offset) + var(--uic-fab--size))
+    );
+}
+
+.uic-fab {
+    // position: sticky;
+    pointer-events: none;
+    top: var(--uic-fab--top-offset);
+    position: sticky;
+    z-index: 310;
+    margin-top: calc(
+        var(--uic-navbar--margin-top) + var(--uic-navbar--height) +
+            var(--uic-fab--top-offset)
+    );
+    margin-right: var(--uic-fab--right-offset);
+
+    & + * {
+        margin-top: var(--uic-fab--page-offset);
+    }
+
+    &__container {
+        justify-content: flex-end;
+        flex-direction: row;
+
+        display: flex;
+        gap: 8px;
+    }
+
+    &--gray {
+        background-color: $palette-gray400;
+    }
+    &--blue {
+        background-color: $palette-blue500;
+    }
+    &--red {
+        background-color: $palette-red400;
+    }
+
+    &__dot {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: all;
+        height: var(--uic-fab--size);
+        width: var(--uic-fab--size);
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-sizing: border-box;
+        &,
+        &:visited {
+            text-decoration: none;
+        }
+
+        transition: box-shadow 333ms ease, transform 333ms ease;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &__text {
+        color: $palette-white;
+        text-decoration: none;
+        font-size: 1.063rem; // 17px;
+        line-height: 1.25rem; // 20px;
+        text-transform: uppercase;
+    }
+}
+
+.hidden {
+    visibility: hidden;
+}

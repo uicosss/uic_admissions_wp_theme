@@ -1,0 +1,346 @@
+// Hero
+//
+// Markup: ../../styleguide/blocks/hero.hbs
+//
+// Styleguide Blocks.Hero
+
+
+@keyframes uic-hero-mask {
+    from {
+        -webkit-mask-position: 0% 0;
+        mask-position: 0% 0;
+    }
+    to {
+        -webkit-mask-position: 100% 0;
+        mask-position: 100% 0;
+    }
+}
+
+.uic {
+    --uic-hero__logo--size: 125px;
+    --uic-hero--height: 700px;
+
+    /**
+    * how long each slide will be shown for
+    * linked to `DURATION` in the js and `data-slide-duration` in the HTML
+    */
+    --uic-hero__slider--duration: 5000ms;
+    /**
+    * how long the slide transition animation should taken (in ms)
+    * linked to `SLIDE_TRANSITION_DURATION` in the js and `data-slide-transition-duration` in the HTML
+    */ 
+    --uic-hero__slider--transition-duration: 1500ms;
+    /** 
+    * how long the previous slide (which is now a layer below the active slide) is still visible for (in ms)
+    * linked to `SLIDE_LINGER_DURATION` in the js and `data-slide-linger-duration` in the HTML
+    */
+    --uic-hero__slider--linger-duration: calc(var(--uic-hero__slider--transition-duration) * 2.5);
+}
+
+.uic-hero {
+    height: var(--uic-hero--height);
+    width: 100%;
+    position: relative;
+
+    &__logo {
+        margin-top: var(--uic-navbar--margin-top);
+        width: var(--uic-hero__logo--size);
+        height: var(--uic-hero__logo--size);
+    }
+
+    &__overlay {
+        z-index: 100;
+        
+        & .uic-section__inner {
+            height: var(--uic-hero--height);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+    }
+
+    &__overlay, &__background {
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    &__controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+        &__autoplay {
+            height: 32px;
+            width: 32px;
+            margin-bottom: var(--uic-section__inner--padding);
+            cursor: pointer;
+
+            transition: transform 333ms ease;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+            & use {
+                transition: fill-opacity 333ms ease;
+            }
+            &:not(.uic-hero__controls__autoplay--paused) use:nth-child(1),
+            &:not(.uic-hero__controls__autoplay--paused) use:nth-child(2) {
+                display: none;
+            }
+            &:not(.uic-hero__controls__autoplay--paused) use:nth-child(3),
+            &:not(.uic-hero__controls__autoplay--paused) use:nth-child(4) {
+                display: block;
+            }
+            
+            &.uic-hero__controls__autoplay--paused use:nth-child(1),
+            &.uic-hero__controls__autoplay--paused use:nth-child(2) {
+                display: block;
+            }
+            &.uic-hero__controls__autoplay--paused use:nth-child(3),
+            &.uic-hero__controls__autoplay--paused use:nth-child(4) {
+                display: none;
+            }
+
+            & use:nth-child(1), & use:nth-child(3) {
+                fill: #FFFFFF;
+                fill-opacity: 0.5;
+            }
+            & use:nth-child(2), & use:nth-child(4) {
+                fill: $palette-blue900;
+            }
+
+            &:hover use:nth-child(1), &:hover use:nth-child(3) {
+                fill-opacity: 1;
+            }
+        }
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    &__background {
+        z-index: 0;
+        /* hide overflow from text scale transform animation */
+        overflow: hidden;
+    }
+
+    &__slider {
+        &__track-container, &__track, &__items, &__item {
+            width: 100%;
+            height: var(--uic-hero--height);
+        }     
+        
+        &__items[style] {
+            width: 100% !important;
+            transform: translate3d(0,0,0) !important;
+        }
+
+        &__item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            color: #fff;
+            background-size: cover;
+            background-position: center;
+            filter: unset;
+            opacity: 0;
+            
+            transition: opacity var(--uic-hero__slider--transition-duration) ease;
+            .uic-hero:not(.uic-hero--no-mask) & {
+                transition: filter 700ms ease-in, opacity 700ms ease;
+                transition-delay: 500ms;
+            }
+
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &[style] {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+
+            &--exiting { // keep visible for just a bit longer
+                z-index: 10;
+                opacity: 1;
+                transition: opacity 700ms ease;
+                .uic-hero--masked & {
+                    transition: filter 700ms ease-in, opacity 700ms ease;
+                    transition-delay: 500ms;
+                    filter: contrast(150%) brightness(90%);    
+                    
+                }
+            }
+
+            &--initial {
+                opacity: 1;
+                transition: all 0s linear;
+            }
+
+            &--active {
+                z-index: 11;
+                .uic-hero:not(.uic-hero--no-mask) & {
+                    animation: uic-hero-mask var(--uic-hero__slider--transition-duration) steps(59) forwards;
+                    mask: url('../images/hero/hero-mask-sprite-optimized.png');
+                    mask-size: 6000% 100%;
+                    -webkit-mask-size: 6000% 100%;
+                }
+            }
+
+            &.glide__slide--active {
+                &[style] {
+                    opacity: 1;
+                    margin-left: 0 !important;
+                    margin-right: 0 !important;
+                }
+            }
+
+            /**
+             * Uncomment to debug mask
+             */
+            // &::after {
+            //     width: 100%;
+            //     height: 100%;
+            //     content: " ";
+            //     position: fixed;
+            //     top: 0;
+            //     left: 0;
+            //     z-index: 99999;
+            //     background-image: url('../images/hero-mask-sprite.png');
+            //     background-repeat: no-repeat;
+            //     background-position-x: calc(100% * 10/59);
+            //     background-size: 6000% 100%;
+            //     background-position-y: 100%;
+            // }
+        }
+
+    }
+    &__text {
+        /**
+         * Values are broken out here and assigned later in modifier classes (ie: &--discover)
+         * so we can use these variables to find the widest viewBox programmatically
+         * @see --uic-hero__text--max-width and --uic-hero__text--scale and 
+         */
+        --uic-hero__text--discover--width: 848.9;
+        --uic-hero__text--discover--height: 146.4;
+        --uic-hero__text--discover--aspect-ratio: calc(var( --uic-hero__text--discover--width) / var(--uic-hero__text--discover--height));
+        --uic-hero__text--discover--o-offset-x: 445.75;
+        --uic-hero__text--discover--o-offset-y: 73.1513;
+        --uic-hero__text--become--width: 677;
+        --uic-hero__text--become--height: 146.4;
+        --uic-hero__text--become--o-offset-x: 370.85;
+        --uic-hero__text--become--o-offset-y: 73.1513;
+        --uic-hero__text--become--aspect-ratio: calc(var( --uic-hero__text--become--width) / var(--uic-hero__text--become--height));
+        --uic-hero__text--explore--width: 736.9;
+        --uic-hero__text--explore--height: 146.4;
+        --uic-hero__text--explore--o-offset-x: 467.85;
+        --uic-hero__text--explore--o-offset-y: 73.1513;
+        --uic-hero__text--explore--aspect-ratio: calc(var( --uic-hero__text--explore--width) / var(--uic-hero__text--explore--height));
+        --uic-hero__text--connect--width: 789.8;
+        --uic-hero__text--connect--height: 146.4;
+        --uic-hero__text--connect--o-offset-x: 177.05;
+        --uic-hero__text--connect--o-offset-y: 73.1513;
+        --uic-hero__text--connect--aspect-ratio: calc(var( --uic-hero__text--connect--width) / var(--uic-hero__text--connect--height));
+
+        &--discover {
+            --uic-hero__text--width: var(--uic-hero__text--discover--width);
+            --uic-hero__text--height: var(--uic-hero__text--discover--height);
+            --uic-hero__text--aspect-ratio: var(--uic-hero__text--discover--aspect-ratio);
+            --uic-hero__text--o-offset-x: var(--uic-hero__text--discover--o-offset-x);
+            --uic-hero__text--o-offset-y: var(--uic-hero__text--discover--o-offset-y);
+        }
+        &--become {
+            --uic-hero__text--width: var(--uic-hero__text--become--width);
+            --uic-hero__text--height: var(--uic-hero__text--become--height);
+            --uic-hero__text--aspect-ratio: var(--uic-hero__text--become--aspect-ratio);
+            --uic-hero__text--o-offset-x: var(--uic-hero__text--become--o-offset-x);
+            --uic-hero__text--o-offset-y: var(--uic-hero__text--become--o-offset-y);
+        }
+        &--explore {
+            --uic-hero__text--width: var(--uic-hero__text--explore--width);
+            --uic-hero__text--height: var(--uic-hero__text--explore--height);
+            --uic-hero__text--aspect-ratio: var(--uic-hero__text--explore--aspect-ratio);
+            --uic-hero__text--o-offset-x: var(--uic-hero__text--explore--o-offset-x);
+            --uic-hero__text--o-offset-y: var(--uic-hero__text--explore--o-offset-y);
+        }
+        &--connect {
+            --uic-hero__text--width: var(--uic-hero__text--connect--width);
+            --uic-hero__text--height: var(--uic-hero__text--connect--height);
+            --uic-hero__text--aspect-ratio: var(--uic-hero__text--connect--aspect-ratio);
+            --uic-hero__text--o-offset-x: var(--uic-hero__text--connect--o-offset-x);
+            --uic-hero__text--o-offset-y: var(--uic-hero__text--connect--o-offset-y);
+        }
+
+        // center the hero text around the "O" based on it's offsets
+        --uic-hero__text--center-x: calc(var(--uic-hero__text--width) / 2);
+        --uic-hero__text--delta-x: calc(var(--uic-hero__text--o-offset-x) / var(--uic-hero__text--width));
+        --uic-hero__text--delta-x-percent: calc(0.5 - var(--uic-hero__text--delta-x));    
+        transform: translateX(calc(var(--uic-hero__text--delta-x-percent) * 100%));
+        transform-origin: calc(50% - (var(--uic-hero__text--delta-x-percent)) * 100%) center;
+        overflow: hidden;
+        .uic-hero:not(.uic-hero--no-zoom) & {
+            transition: transform calc(var(--uic-hero__slider--transition-duration) * 0.75) cubic-bezier(0.37, 0, 0.63, 1);
+        }
+        .uic-hero:not(.uic-hero--no-zoom) .uic-hero__slider__item--exiting & {
+            transform: translateX(calc(var(--uic-hero__text--delta-x-percent) * 100%)) scale(1.6);
+        }
+
+        /**
+         * get a scaling factor using this hero text's aspect-ratio in proportion to the
+         * largest aspect ratio (widest svg) of all the hero texts. This makes it possible
+         * to maintain a constant height while still using a % based width;
+         */
+        --uic-hero__text--scale: calc(
+            var(--uic-hero__text--aspect-ratio)
+            /
+            max(
+                var(--uic-hero__text--discover--aspect-ratio),
+                var(--uic-hero__text--become--aspect-ratio),
+                var(--uic-hero__text--explore--aspect-ratio),
+                var(--uic-hero__text--connect--aspect-ratio)
+            )
+        );
+        width: calc(67.5% * var(--uic-hero__text--scale));
+
+    }
+}
+
+
+@media screen and (min-width: 1366px) {
+    .uic {
+        --uic-hero--height: 90vh;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .uic {
+        --uic-hero--height: 400px;
+        &-hero {
+            &__slider {
+                &__item {
+                    &::after {
+                        position: absolute;
+                        height: 100%;
+                        width: 100%;
+                        top: 0;
+                        left: 0;
+                        content: " ";
+                        z-index: 10;
+                        background-color: rgba(80, 122, 168, 0.5);
+                    }
+                }
+            }
+            &__text {
+                z-index: 11;
+            }
+        }
+    }
+}

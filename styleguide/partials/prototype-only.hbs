@@ -1,0 +1,7 @@
+{{#if prototype.isPrototype}}
+    {{> @partial-block }}
+{{else}}
+    {{#if forcePrototype}}
+        {{> @partial-block }}
+    {{/if}}
+{{/if}}

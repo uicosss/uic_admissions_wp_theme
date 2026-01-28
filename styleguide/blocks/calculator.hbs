@@ -1,0 +1,201 @@
+{{#>showcase}}
+    <div class="uic-calculator uic-section">
+        <div class="uic-section__container">
+            <div class="uic-section__inner">
+                <div class="uic-calculator__questionnaire-container">
+                    <h3 class="uic-h3">How much will UIC cost? Use our tuition calculator</h3>
+                    <div class="uic-calculator__questionnaire">
+                        <div class="uic-calculator__prompt">Where do you live?</div>
+                        <div class="uic-calculator__response">
+                            <select
+                                data-trigger
+                                class="form-control uic-calculator__select"
+                                name="location"
+                                id="uic-calculator__select--location"
+                            >
+                                <option value="">Select A Location</option>
+                                <option value="resident">Resident / In State</option>
+                                <option value="non-resident">Non Resident / Out of State</option>
+                                <option value="international">International</option>
+                            </select>
+                        </div>
+                        <div class="uic-calculator__prompt">What program are you interested in?</div>
+                        <div class="uic-calculator__response">
+                            <select
+                                data-trigger
+                                class="form-control uic-calculator__select"
+                                name="program"
+                                id="uic-calculator__select--program"
+                            >
+                                <option value="">Select A Program</option>
+                                <optgroup label="Architecture, Design, and the Arts">
+                                    <option value="0">Art History</option>
+                                    <option value="0">Interdisciplinary Education in the Arts</option>
+                                    <option value="0">Undecided</option>
+                                    <option value="2640">All Other Programs</option>
+                                </optgroup>
+                                <optgroup label="Applied Health Sciences">
+                                    <option value="1064">Kinesiology</option>
+                                    <option value="2350">Health Information Management</option>
+                                    <option value="1268">Nutrition</option>
+                                    <option value="0">All Other Programs</option>
+                                </optgroup>
+                                <option value="2376">Business Administration</option>
+                                <option value="0">Education</option>
+                                <option value="2518">Engineering</option>
+                                <optgroup label="Liberal Arts and Sciences">
+                                    <option value="1836">Psychology</option>
+                                    <option value="1836">Physics</option>
+                                    <option value="1836">Biological Sciences</option>
+                                    <option value="1836">Neuroscience and Pre-Neuroscience</option>
+                                    <option value="1836">Chemistry, Biochemistry</option>
+                                    <option value="1836">Integrated and Pre-Integrated Health Studies</option>
+                                    <option value="1836">Earth and Environmental Sciences</option>
+                                    <option value="0">All Other Programs</option>
+                                </optgroup>
+                                <option value="4478">Nursing</option>
+                                <option value="2000">Public Health</option>
+                                <option value="0">Urban Planning and Public Affairs</option>
+                            </select>
+                        </div>
+                        <div class="uic-calculator__prompt">Do you need UIC health insurance?</div>
+                        <div class="uic-calculator__response">
+                            <select
+                                data-trigger
+                                class="form-control uic-calculator__select"
+                                name="insurance"
+                                id="uic-calculator__select--insurance"
+                            >
+                                <option value="">Select Health Insurance Needs</option>
+                                <option value="insured">Yes</option>
+                                <option value="uninsured">No</option>
+                            </select>
+                        </div>
+                        <div class="uic-calculator__prompt">Will you live on-campus?</div>
+                        <div class="uic-calculator__response">
+                            <select
+                                data-trigger
+                                class="form-control uic-calculator__select"
+                                name="housing"
+                                id="uic-calculator__select--housing"
+                            >
+                                <option value="">Select Housing Needs</option>
+                                <option value="on-campus">On-Campus</option>
+                                <option value="off-campus">Off-Campus</option>
+                            </select>
+                        </div>
+                        <div class="uic-calculator__prompt uic-calculator__submit-label--hidden uic-calculator__submit-label">You're finished!</div>
+                        <div class="uic-calculator__response uic-calculator__submit-container">
+                            <button type="submit" disabled class="uic-calculator__submit">Calculate Your Tuition</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="uic-calculator__results uic-calculator__results">
+                    <h3 class="uic-h3">Here's your annual estimated cost of attendance:</h3>
+                    <div class="uic-calculator__breakdown">
+                        <div class="uic-calculator__line-item__tuition-label">
+                            Tuition
+                        </div>
+                        <div class="uic-calculator__line-item__tuition-symbol">
+                            $
+                        </div>
+                        <div class="uic-calculator__line-item__tuition-value">
+                            0
+                        </div>
+                        <div class="uic-calculator__line-item__divider-0"></div>
+                        <div class="uic-calculator__line-item__differential-label">
+                            Program Differential
+                        </div>
+                        <div class="uic-calculator__line-item__differential-symbol">
+                            $
+                        </div>
+                        <div class="uic-calculator__line-item__differential-value">
+                            0
+                        </div>
+                        <div class="uic-calculator__line-item__divider-1"></div>
+                        <div class="uic-calculator__line-item__fees-label">
+                            Mandatory Fees
+                        </div>
+                        <div class="uic-calculator__line-item__fees-symbol">
+                            $
+                        </div>
+                        <div class="uic-calculator__line-item__fees-value">
+                            0
+                        </div>
+                        <div class="uic-calculator__line-item__fees-desc">
+                            Student fees, health insurance, assessments
+                        </div>
+                        <div class="uic-calculator__line-item__divider-2"></div>
+                        <div class="uic-calculator__line-item__attendance-label">
+                            Cost of Attendance
+                        </div>
+                        <div class="uic-calculator__line-item__books-label">
+                           Books and Supplies
+                        </div>
+                        <div class="uic-calculator__line-item__books-symbol">
+                            $
+                        </div>
+                        <div class="uic-calculator__line-item__books-value">
+                            0
+                        </div>
+                        <div class="uic-calculator__line-item__housing-label">
+                            Housing and Food Expenses
+                        </div>
+                        <div class="uic-calculator__line-item__housing-symbol">
+                            $
+                        </div>
+                        <div class="uic-calculator__line-item__housing-value">
+                            0
+                        </div>
+                        <div class="uic-calculator__line-item__personal-label">
+                            Personal Expenses
+                        </div>
+                        <div class="uic-calculator__line-item__personal-symbol">
+                            $
+                        </div>
+                        <div class="uic-calculator__line-item__personal-value">
+                            0
+                        </div>
+                        <div class="uic-calculator__line-item__personal-label">
+                            Personal Expenses
+                        </div>
+                        <div class="uic-calculator__line-item__personal-symbol">
+                            $
+                        </div>
+                        <div class="uic-calculator__line-item__personal-value">
+                            0
+                        </div>
+                        <div class="uic-calculator__line-item__transportation-label">
+                            Transportation
+                        </div>
+                        <div class="uic-calculator__line-item__transportation-symbol">
+                            $
+                        </div>
+                        <div class="uic-calculator__line-item__transportation-value">
+                            0
+                        </div>
+                        <div class="uic-calculator__line-item__divider-3 "></div>
+                        <div class="uic-calculator__line-item__total-label">
+                            Total
+                        </div>
+                        <div class="uic-calculator__line-item__total-symbol">
+                            $
+                        </div>
+                        <div class="uic-calculator__line-item__total-value">
+                            0
+                        </div>
+                    </div>
+                    <div class="uic-calculator__results__learn-more-container">
+                        <a href="https://admissions.uic.edu/undergraduate/tuition-financial-aid" target="_blank" title="Learn more about tuition from the UIC Registrar" class="uic-calculator__results__learn-more">Learn More</a>
+                    </div>
+                    <div class="uic-calculator__results__links">
+                    </div>
+                    <svg xmlns:xlink="http://www.w3.org/1999/xlink" class="uic-calculator__results-close" viewBox="0 0 64 64">
+                        <use class="uic-calculator__results-close--default" xlink:href="../images/calculator-results-close.svg#uic-calculator__results-close" />
+                        <use class="uic-calculator__results-close--hover" xlink:href="../images/calculator-results-close.svg#uic-calculator__results-close--hover" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/showcase}}

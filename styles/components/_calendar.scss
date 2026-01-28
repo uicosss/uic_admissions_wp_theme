@@ -1,0 +1,275 @@
+.uic-calendar {
+    &__highlighted-date {
+        display: none;
+    }
+
+    &__day--selected {
+        color: $palette-yellow400;
+    }
+    &__day--focused {
+        box-shadow: inset 0px 0px 0px 2px $palette-yellow400;
+    }
+
+
+    &__container {
+        display: flex;
+
+        & .vanilla-calendar {
+            width: 100%;
+            font-weight: 500;
+            border-radius: 0;
+            grid-template-rows: 1fr 7fr;
+            background-color: unset;
+
+            &-header {
+                display: grid;
+                align-self: center;
+                height: 100%;
+                grid-template-columns: 1fr 5fr 1fr;
+            }
+
+            &_month .vanilla-calendar-header {
+                grid-template-columns: 1fr;
+            }
+
+            &-arrow {
+                &_next, &_prev {
+                    left:0;
+                    right: 0;
+                    justify-self: center;
+                    height: 100%;
+                    width: 100%;
+                    font-weight: 500; /* unnecessary, but helps thin the list of dom nodes with 400 font-weight  */
+                }
+
+                &_next:hover {
+                    transform: translateX(4px);
+                }
+                &_prev:hover {
+                    transform: rotateZ(180deg) translateX(4px); // not -4px because it's rotated
+                }
+
+                &::before, &::after {
+                    left: 45%;
+                    transition: background-color 333ms ease;
+                    background-color: $palette-yellow400;
+                    height: 2px;
+                }
+                transition: transform 333ms ease-out;
+                &::before {
+                    top: calc(50% - 4px);
+                }
+                &::after {
+                    bottom: calc(50% - 4px);
+                }
+                &:hover::before, &:hover::after {
+                    width: 10px;
+                    background-color: $palette-white;
+                }
+            }
+
+            &-days {
+                gap: 0;
+            }
+
+            &-day {
+                &__btn_today {
+                    font-weight: inherit;
+                    text-decoration: underline;
+                    text-underline-offset: 4px;
+                    text-decoration-thickness: 3px;
+                }
+                &__btn,
+                &__btn_today,
+                &__btn_weekend,
+                &__btn_selected,
+                &__btn_weekend.vanilla-calendar-day__btn_selected,
+                &__btn_weekend.vanilla-calendar-day__btn_today {
+                    cursor: pointer;
+                    color: $palette-white;
+                    font-size: 1.0625rem; // 17px;
+                    line-height: 1.25rem; // 20px;
+                    background-color: transparent;
+                    font-weight: 900;
+                    border-radius: 0;
+                    transition: background-color 333ms ease, color 333ms ease;
+                    width: 100%;
+                    height: 100%;
+                    &:not(.vanilla-calendar-day__btn_disabled):hover, &.vanilla-calendar-days_selecting {
+                        background-color: rgba(0, 0, 0, 0.2);
+                    }
+                    &.uic-calendar__day--selected {
+                        color: $palette-yellow400;
+                    }
+                }
+
+
+                &:nth-child(7n + 1) { --uic-calendar-popup--x-shift: 0%; } // monday
+                &:nth-child(7n + 2) { --uic-calendar-popup--x-shift: 0%; } // tuesday
+                &:nth-child(7n + 3) { --uic-calendar-popup--x-shift: 0%; } // wednesday
+                &:nth-child(7n + 4) { --uic-calendar-popup--x-shift: 0%; } // thursday
+                &:nth-child(7n + 5) { --uic-calendar-popup--x-shift: -10%; } // friday
+                &:nth-child(7n + 6) { --uic-calendar-popup--x-shift: -20%; } // saturday
+                &:nth-child(7n + 7) { --uic-calendar-popup--x-shift: -30%; } // sunday
+
+                &__btn_prev,
+                &__btn_next,
+                &__btn_prev.vanilla-calendar-day__btn_weekend,
+                &__btn_next.vanilla-calendar-day__btn_weekend {
+                    color: rgba(255, 255, 255, 0.33);
+
+                    &:hover {
+                        color: #FFFFFF;
+                    }
+                }
+
+                & .vanilla-calendar-day__popup {
+                    &:before, &:after {
+                        display: none;
+                    }
+                    display: none;
+                    pointer-events: none;
+                    & .uic-calendar-popup {
+                        display: none;
+                        pointer-events: none;
+                    }
+                }
+
+                &:focus,
+                &:hover,
+                &:focus-within,
+                &__btn:focus, &__btn:hover {
+                    & .vanilla-calendar-day__popup,
+                    & + .vanilla-calendar-day__popup,
+                    & .vanilla-calendar-day__popup:hover {
+                        &:after {
+                            display: block;
+                        }
+                        display: block;
+                        opacity: 1;
+                        visibility: visible;
+                        pointer-events: auto;
+                        & .uic-calendar-popup {
+                            display: flex;
+                            pointer-events: auto;
+                        }
+                    }
+                }
+
+                &__popup {
+                    // font-size: 1.0625rem; // 17px;
+                    // line-height: 1.25rem; // 20px;
+                    padding: 8px 0 0;
+                    font-weight: 500;
+                    width: max-content;
+                    z-index: calc(var(--uic-calendar-popup--base-z-index) + 1);
+                    &:before {
+                        display: none;
+                    }
+                    &:after {
+                        z-index: calc(var(--uic-calendar-popup--base-z-index) + 2);
+                    }
+
+                }
+            }
+
+
+            &-months {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            &-years {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            &-months, &-years {
+                background-color: unset;
+                cursor: pointer;
+                height: 100%;
+            }
+            &-month {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            &-months__month, &-years__year {
+                color: $palette-white;
+                height: 100%;
+                transition: background-color 333ms ease, color 333ms ease;
+                background-color: rgba(255, 255, 255, 0.15);
+                &:hover {
+                    color: $palette-white;
+                    background-color: rgba(0, 0, 0, 0.15);
+                }
+                &_selected {
+                    background-color: $palette-white;
+                    color: $palette-blue900;
+                }
+                &_disabled {
+                    opacity: 0.5;
+                    pointer-events: all;
+                    cursor: not-allowed;
+                }
+            }
+
+            &-week__day {
+                color: $palette-white;
+                font-weight: 500;
+                letter-spacing: 0.5px;
+                font-size: 1.0625rem; // 17px;
+                line-height: 1.25rem; // 20px;
+            }
+
+            &-header__content {
+                gap: 2px;
+            }
+            &-month, &-year {
+                color: $palette-white;
+                font-size: 1.0625rem; // 17px;
+                line-height: 1.25rem; // 20px;
+                transition: color 333ms ease;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                &:hover {
+                    color: $palette-yellow400;
+                }
+            }
+            &-wrapper {
+                height: unset;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 1279px) {
+    .uic-calendar {
+        &__container .vanilla-calendar{
+            &-day {
+                // &:nth-child(7n + 1) { --uic-calendar-popup--x-shift: min(40%, calc(50% - 32px)); } // monday
+                // &:nth-child(7n + 2) { --uic-calendar-popup--x-shift: 20%; } // tuesday
+                // &:nth-child(7n + 3) { --uic-calendar-popup--x-shift: 10%; } // wednesday
+                // &:nth-child(7n + 4) { --uic-calendar-popup--x-shift: 0%; } // thursday
+                // &:nth-child(7n + 5) { --uic-calendar-popup--x-shift: -10%; } // friday
+                &:nth-child(7n + 6) { --uic-calendar-popup--x-shift: -15%; } // saturday
+                &:nth-child(7n + 7) { --uic-calendar-popup--x-shift: calc(-1 * min(40%, calc(50% - 48px))); } // sunday
+
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .uic-calendar {
+        &__popup {
+            transform: translateX(var(--uic-calendar-popup--x-shift));
+        }
+        &__container .vanilla-calendar {
+            &-day {
+                &:nth-child(7n + 1) { --uic-calendar-popup--x-shift: min(40%, calc(50% - 32px)); } // monday
+                &:nth-child(7n + 2) { --uic-calendar-popup--x-shift: 20%; } // tuesday
+                &:nth-child(7n + 3) { --uic-calendar-popup--x-shift: 10%; } // wednesday
+                &:nth-child(7n + 4) { --uic-calendar-popup--x-shift: 0%; } // thursday
+                &:nth-child(7n + 5) { --uic-calendar-popup--x-shift: -10%; } // friday
+                &:nth-child(7n + 6) { --uic-calendar-popup--x-shift: -20%; } // saturday
+                &:nth-child(7n + 7) { --uic-calendar-popup--x-shift: calc(-1 * min(40%, calc(50% - 32px))); } // sunday
+            }
+        }
+    }
+}

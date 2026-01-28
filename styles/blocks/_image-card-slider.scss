@@ -1,0 +1,99 @@
+// Image Card Slider
+//
+// Markup: ../../styleguide/blocks/image-card-slider.hbs
+//
+// Styleguide Blocks.Image Card Slider
+
+.uic-image-card-slider {
+    background-color: $palette-white;
+    color: $palette-gray400;
+
+    & .uic-section__inner {
+        padding-top: 128px;
+        padding-bottom: 38.32px;
+    }
+
+    &__card {
+        display: flex;
+        & .uic-video-modal__trigger {
+            display: flex;
+            flex-direction: column;
+            &,
+            &:visited {
+                color: inherit;
+                text-decoration: none;
+                transition: color 333ms ease;
+            }
+
+            &:hover {
+                color: #000;
+            }
+        }
+
+        &__media {
+            aspect-ratio: 365 / 225;
+        }
+        &__title {
+            font-weight: 700;
+            @extend .uic-text--lg;
+            margin-top: 24px;
+        }
+        &__text {
+            margin-top: 19px;
+            @extend .uic-text--lg;
+
+            h1 h2 h3 h4 h5 {
+                font-weight: 700;
+            }
+        }
+
+        &__title ~ &__text,
+        & .uic-video-modal__trigger ~ &__text {
+            margin-top: 0px;
+        }
+    }
+
+    & .uic-h3 {
+        text-align: center;
+        margin-bottom: 25.28px;
+    }
+}
+
+// elements within the wysiwyg come w/o classes so all styling should be based off elements only
+.wysiwyg-content {
+    // these are defaults for p elements
+    font-weight: 400;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-weight: 700;
+    }
+
+    strong,
+    b {
+        font-weight: 500;
+    }
+
+    em,
+    i {
+        font-style: italic;
+    }
+
+    a {
+        color: $palette-blue900;
+        font-weight: 700;
+    }
+
+    ul {
+        list-style: disc;
+        list-style-position: inside;
+    }
+
+    ol {
+        list-style: decimal;
+        list-style-position: inside;
+    }
+}

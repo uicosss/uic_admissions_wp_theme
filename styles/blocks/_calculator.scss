@@ -1,0 +1,756 @@
+// Calculator
+//
+// Markup: ../../styleguide/blocks/calculator.hbs
+//
+// Styleguide Blocks.Calculator
+@use "sass:color";
+
+
+.uic {
+    --uic-calculator__results--padding-top: 56px;
+    --uic-calculator__results__close--size: 20px;
+    --uic-calculator__results__close--offset: 32px;
+    --uic-calculator__questionnaire--width: 980px;
+    --uic-calculator__questionnaire--row-height: 36px;
+}
+
+.uic-calculator {
+    font-weight: 400;
+    background-color: $palette-blue400;
+    background-image: url('../images/calculator-ripple-bg.svg');
+    background-repeat: no-repeat;
+    background-size: auto 400px;
+    background-position: left 64px;
+
+    & .uic-section__inner {
+        padding-top: 128px;
+    }
+
+    &__line-item {
+        &__choices-desc { grid-area: choices-desc; }
+		&__tuition {
+            &-label { grid-area: tuition-label; }
+            &-symbol { grid-area: tuition-symbol; }
+            &-value { grid-area: tuition-value; }
+        }
+        &__differential {
+            &-label { grid-area: differential-label; }
+            &-symbol { grid-area: differential-symbol; }
+            &-value { grid-area: differential-value; }
+        }
+        &__housing-estimate {
+            &-label { grid-area: housing-estimate-label; }
+            &-symbol { grid-area: housing-estimate-symbol; }
+            &-value { grid-area: housing-estimate-value; }
+        }
+        &__fees {
+            &-label { grid-area: fees-label; }
+            &-symbol { grid-area: fees-symbol; }
+            &-value { grid-area: fees-value; }
+            &-desc { grid-area: fees-desc; }
+        }
+        &__attendance {
+			&-label { grid-area: attendance-label; }
+			&-symbol { grid-area: attendance-symbol; }
+			&-value { grid-area: attendance-value; }
+		}
+		&__expenses-label { grid-area: expenses-label; }
+        &__books {
+            &-label { grid-area: books-label; }
+            &-symbol { grid-area: books-symbol; }
+            &-value { grid-area: books-value; }
+        }
+        &__housing-variable {
+            &-label { grid-area: housing-variable-label; }
+            &-symbol { grid-area: housing-variable-symbol; }
+            &-value { grid-area: housing-variable-value; }
+        }
+        &__personal {
+            &-label { grid-area: personal-label; }
+            &-symbol { grid-area: personal-symbol; }
+            &-value { grid-area: personal-value; }
+        }
+        &__transportation {
+            &-label { grid-area: transportation-label; }
+            &-symbol { grid-area: transportation-symbol; }
+            &-value { grid-area: transportation-value; }
+        }
+        &__total {
+            &-label { grid-area: total-label; }
+            &-symbol { grid-area: total-symbol; }
+            &-value { grid-area: total-value; }
+        }
+
+        &__variable {
+            &-label { grid-area: variable-label; }
+            &-symbol { grid-area: variable-symbol; }
+            &-value { grid-area: variable-value; }
+        }
+
+        &__expenses-label {
+            font-weight: 500;
+        }
+
+        &__variable, &__total {
+            &-label, &-symbol, &-value {
+                font-weight: 500;
+            }
+        }
+
+        &__choices-desc {
+            text-transform: capitalize;
+            text-align: center;
+        }
+
+        &__choices-desc, &__attendance-label {
+            padding-bottom: 36px;
+        }
+
+        &__tuition, &__differential, &__fees, &__attendance, &__books, &__housing-variable, &__housing-estimate, &__personal, &__transportation, &__total, &__choices, &__variable {
+            &-value, &-symbol, &-label {
+                font-size: 1.813rem; // 29px; // 22pt;
+                line-height:  2.118rem; // 35px; // 26.4pt;
+            }
+            &-value {
+                text-align: right;
+            }
+
+            &-desc {
+                font-size: 1.563rem; // 25px;
+                line-height: 1.831rem; // 29.3px;
+            }
+
+            &-label, &-value, &-desc {
+                align-self: baseline;
+            }
+        }
+        &__tuition, &__differential, &__housing-estimate, &__attendance, &__fees {
+            &-label, &-value, &-symbol, &-desc {
+                color: $palette-blue900;
+            }
+        }
+
+        &__books, &__housing-variable, &__personal, &__transportation, &__expenses, &__variable, &__total {
+            &-label, &-desc {
+                font-size: 1.563rem; // 25px;
+                line-height: 1.831rem; // 29.3px;
+            }
+            &-label, &-value, &-symbol, &-desc {
+                color: $palette-gray400;
+            }
+        }
+
+        &__attendance {
+            &-label, &-symbol, &-value {
+                font-weight: 700;
+            }
+            &-label, &-value, &-symbol {
+                font-size: 1.813rem; // 29px; // 22pt;
+                line-height:  2.118rem; // 35px; // 26.4pt;
+            }
+        }
+
+        &__divider {
+            &-0, &-1, &-2, &-3, &-4, &-5, &-6 {
+                height: var(--uic-calculator__divider--height);
+                background-color: $palette-gray400;
+            }
+
+            &-0 { grid-area: divider-0; }
+            &-1 { grid-area: divider-1; }
+            &-2 { grid-area: divider-2; }
+            &-3 { grid-area: divider-3; }
+            &-4 { grid-area: divider-4; }
+            &-5 { grid-area: divider-5; }
+            &-6 { grid-area: divider-6; }
+        }
+    }
+
+    &__breakdown {
+        --uic-calculator__divider--height: 2px;
+        margin: 0 96px 0;
+        display: grid;
+        column-gap: 8px;
+        row-gap: 12px;
+
+        grid-template-columns: 1fr auto auto;
+        grid-template-areas:
+			"choices-desc choices-desc choices-desc"
+			"tuition-label tuition-symbol tuition-value"
+			"divider-0 divider-0 divider-0"
+			"differential-label differential-symbol differential-value"
+			"divider-1 divider-1 divider-1"
+			"housing-estimate-label housing-estimate-symbol housing-estimate-value"
+			"divider-2 divider-2 divider-2"
+			"fees-label fees-label fees-label"
+			"fees-desc fees-symbol fees-value"
+			"divider-3 divider-3 divider-3"
+			"attendance-label attendance-symbol attendance-value"
+			"expenses-label expenses-label expenses-label"
+			"books-label books-symbol books-value"
+			"housing-variable-label housing-variable-symbol housing-variable-value"
+			"personal-label personal-symbol personal-value"
+			"transportation-label transportation-symbol transportation-value"
+			"divider-4 divider-4 divider-4"
+			"variable-label variable-symbol variable-value"
+			"divider-5 divider-5 divider-5"
+			"total-label total-symbol total-value"
+			"divider-6 divider-6 divider-6";
+        color: $palette-gray400;
+    }
+
+    &__footer {
+        column-count: 2;
+        background-color: $palette-blue900;
+        color: #fff;
+        padding: 32px;
+        font-size: 1.119rem;
+        line-height: 1.5rem;
+
+        span {
+            font-weight: 600;
+            color: $palette-yellow400;
+        }
+    }
+
+    &__results {
+        margin: 0 auto;
+        max-width: 980px;
+        border-bottom: 0;
+        padding: var(--uic-calculator__results--padding-top) 0 0 0;
+        position: relative;
+        background-color: $palette-white;
+        border: 1px solid $palette-gray400;
+        border-bottom: 0;
+        transition: visibility 0s ease, max-height 1s ease, opacity 1s ease;
+        display: block;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition-delay: 1s, 0s, 0s;
+        &--visible {
+            transition-delay: 0s;
+            max-height: 300em;  // magic number which affects perceived delay of results show/hide animation
+            opacity: 1;
+            transition-delay: 0s;
+            visibility: visible;
+        }
+
+        &-close {
+            position: absolute;
+            top: var(--uic-calculator__results__close--offset);
+            right: var(--uic-calculator__results__close--offset);
+            height: var(--uic-calculator__results__close--size);
+            width: var(--uic-calculator__results__close--size);
+            cursor: pointer;
+            color: $palette-gray300;
+
+            &--default, &--hover {
+                transition: 333ms ease opacity;
+            }
+
+            &--hover {
+                opacity: 0;;
+            }
+            &--default {
+                opacity: 1;
+            }
+
+            &:hover, &:focus, &:active {
+                .uic-calculator__results-close {
+                    &--default { opacity: 0; }
+                    &--hover { opacity: 1; }
+                }
+            }
+        }
+
+        & > .uic-h3 {
+            text-align: center;
+            color: $palette-blue900;
+            padding: 0 calc(var(--uic-calculator__results__close--size) + (2 * var(--uic-calculator__results__close--offset))) 48px;
+        }
+
+        &__learn-more {
+            &-container {
+                margin-top: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            color: $palette-blue400;
+            font-size: 1.438rem; // 23px; // 17pt;
+            line-height: 1.688rem; // 27px; // 20.4pt;
+            font-weight: 500;
+            text-decoration: underline;
+            text-decoration-thickness: 3px;
+            text-transform: uppercase;
+            text-underline-offset: 5px;
+            text-align: center;
+            transition: text-underline-offset 400ms ease-in-out, text-decoration-color 400ms ease;
+            &:hover {
+                text-underline-offset: 8px;
+                text-decoration-color: $palette-blue500;
+            }
+        }
+
+        &__link {
+            @extend .uic-text--base;
+            text-align: center;
+
+            & > span {
+                display: inline-block;
+                &:last-child {
+                    white-space: nowrap;
+                }
+            }
+            &, &:visited {
+                color: $palette-red400;
+                text-decoration: none;
+            }
+
+            &__arrow {
+                background-image: url('../images/calculator-arrow-right.svg');
+                height: 13.62px;
+                width: 14px;
+                vertical-align: baseline;
+                margin-left: 4px;
+                display: inline-block;
+                transition: transform 333ms ease;
+            }
+
+            &:hover .uic-calculator__results__link__arrow {
+                transform: translateX(4px);
+            }
+        }
+
+        &__links {
+            border-top: 3px solid $palette-red400;
+            display: grid;
+            text-align: center;
+            gap: 16px;
+            padding-top: 12px;
+
+            &[data-links-count="1"] {
+                grid-template-areas: "link-0";
+                grid-template-columns: 1fr;
+                &  > div:nth-child(1)  { grid-area: link-0; }
+            }
+            &[data-links-count="2"] {
+                grid-template-areas: "link-0 link-1";
+                grid-template-columns: 1fr 1fr;
+                &  > div:nth-child(1)  { grid-area: link-0; }
+                &  > div:nth-child(2)  { grid-area: link-1; }
+            }
+            &[data-links-count="3"] {
+                grid-template-areas: "link-0 link-1 link-2";
+                grid-template-columns: 1fr 1fr 1fr;
+                &  > div:nth-child(1)  { grid-area: link-0; }
+                &  > div:nth-child(2)  { grid-area: link-1; }
+                &  > div:nth-child(3)  { grid-area: link-2; }
+            }
+            &[data-links-count="4"] {
+                grid-template-areas: "link-0 link-1 link-2 link-3";
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                &  > div:nth-child(1)  { grid-area: link-0; }
+                &  > div:nth-child(2)  { grid-area: link-1; }
+                &  > div:nth-child(3)  { grid-area: link-2; }
+                &  > div:nth-child(4)  { grid-area: link-3; }
+            }
+
+            margin: 32px 32px 24px;
+        }
+    }
+
+    &__questionnaire {
+        max-width: var(--uic-calculator__questionnaire--width);
+        margin: 0 auto;
+        display: grid;
+        column-gap: 8px;
+        row-gap: 20px;
+        grid-template-columns: 1fr 1fr;
+        padding-bottom: 67.14px;
+
+        &-container {
+            transition: visibility 0s ease, max-height 1s ease, opacity 1s ease;
+            display: block;
+            // overflow: hidden;
+            opacity: 1;
+            max-height: 100em;
+            /* magic number for max-height = enough height */
+            visibility: visible;
+            transition-delay: 0s;
+
+            & > .uic-h3 {
+                color: $palette-blue900;
+                text-align: center;
+                line-height: 120%;
+                font-size: 1.75rem; // 28px;
+                margin-bottom: 48px;
+            }
+            &--hidden {
+                // opacity: 0;
+                // max-height: 0;
+                display: block;
+                max-height: 0;
+                opacity: 0;
+                visibility: hidden;
+                transition-delay: 1s, 0s, 0s;
+            }
+        }
+    }
+    &__prompt {
+        font-size: 1.5625rem; // 25px;
+        font-weight: 500;
+        color: $palette-blue900;
+        font-family: 'Roboto';
+        line-height: 120%;
+
+        & > span {
+            margin-left: 8px;
+            color: $palette-red400;
+        }
+    }
+
+    &__response {
+        height: var(--uic-calculator__questionnaire--row-height);
+        --uic-calculator__select-arrow--size: 18px;
+        --uic-calculator__select--side-padding: 8px;
+
+        & .choices {
+            &.is-focused {
+                overflow: visible;
+            }
+            &__placeholder {
+                opacity: 1;
+            }
+
+            &__input, &__input option  {
+                font-weight: 500;
+            }
+
+            &[data-type*=select-one]::after {
+                display: none;
+            }
+
+            & .choices__inner .choices__list.choices__list--single  {
+                position: absolute;
+                box-sizing: border-box;
+                z-index: 10;
+                height: var(--uic-calculator__questionnaire--row-height);
+                padding: 0 calc(
+                    var(--uic-calculator__select-arrow--size)
+                    +
+                    (2 * var(--uic-calculator__select--side-padding))
+                ) 0 var(--uic-calculator__select--side-padding);
+
+                & .choices__item {
+                    width: 100%;
+                    height: 36px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+
+
+            &.is-open, &.is-focused {
+
+                & .choices__inner {
+                    overflow: visible;
+                    outline: 2.5px solid $palette-yellow400;
+
+                    // box-shadow: 0px -0.5px 0px 1px rgba(0, 0, 0, 0.65),
+                    //             0px 8px 12px -4px rgba(0, 0, 0, 0.33),
+                    //             0px 0px 24px 0px rgba(0, 0, 0, 0.35);
+                    //inset 0 -2px 4px 4px $palette-blue600;
+                    & .choices__list.choices__list--single {
+                        background-color: $palette-blue900;
+                        z-index: 100;
+                    }
+                }
+                &:not(.is-flipped).is-open .choices__list.choices__list--single {
+                    border-top-left-radius: 2.5px;
+                    border-top-right-radius: 2.5px;
+                }
+                &.is-flipped.is-open .choices__list.choices__list--single {
+                    border-bottom-left-radius: 2.5px;
+                    border-bottom-right-radius: 2.5px;
+                }
+            }
+            &.is-open .choices__list.choices__list--single {
+                background-image: url('../images/calculator-arrow-close.svg');
+            }
+            &__inner {
+                padding: 0;
+                min-height: var(--uic-calculator__questionnaire--row-height);
+                border: 0;
+                border-radius: 0;
+                color: $palette-white;
+                background-color: #000;//$palette-blue600;
+            }
+            &[data-type*=select-one] .choices__inner {
+                padding: 0;
+            }
+
+            &__list--dropdown,
+            &__list[aria-expanded] {
+                z-index: 50;
+                color: $palette-blue900;
+                background-color: $palette-white;// $palette-blue600;
+                // box-shadow: 0px 1px 0px 1px rgba(0, 0, 0, 0.25),
+                //             0px 1px 2px 0px rgba(0, 0, 0, 0.85),
+                //             0px 1px 18px 0px rgba(0, 0, 0, 0.33),
+                //             0px 1px 24px 0px rgba(0, 0, 0, 0.10);
+                outline: 2.5px solid $palette-yellow400;
+                word-break: unset;
+                border: 0;
+            }
+
+            &__heading,
+            &__list--single,
+            &__list--dropdown .choices__item,
+            &__list[aria-expanded] .choices__item {
+                color: $palette-blue900;
+                padding: 0 var(--uic-calculator__select--side-padding);
+                font-weight: 500;
+                text-transform: uppercase;
+                line-height: var(--uic-calculator__questionnaire--row-height);
+            }
+
+            &__heading {
+                border: 0;
+                letter-spacing: 1px;
+                font-size: 1.0625rem; // 17px;
+                background: $palette-gray400;//rgba(255, 255, 255, 0.15);
+                color: $palette-white;
+                cursor: default;
+
+            }
+
+            &__placeholder {
+                color: $palette-white;
+            }
+            &__list--single .choices__item:not(.choices__placeholder) {
+                color: $palette-yellow400;
+            }
+
+            &__list--single,
+            &__list--dropdown .choices__item,
+            &__list[aria-expanded] .choices__item {
+                font-size: 1rem; // 16px;
+                // transition: background-color 333ms ease, color 333ms ease;
+                &.is-highlighted, &.is-selected {
+                    background-color: $palette-yellow400;
+                    color: $palette-blue900;
+                }
+
+                &:first-child {
+                    display: none;
+                }
+            }
+        }
+    }
+
+
+    &__select:not(.choices__input) {
+        appearance: none;
+        line-height: var(--uic-calculator__questionnaire--row-height);
+        width: 100%;
+        height: 100%;
+        padding: 0 var(--uic-calculator__select--side-padding);
+        &:focus {
+            outline: 1.5px solid $palette-white;
+        }
+    }
+
+    &__select:not(.choices__input),
+    & .choices .choices__list.choices__list--single {
+        background-color: $palette-blue900;
+    }
+
+    &__select:not(.choices__input) {
+        &:focus, &:focus-within {
+            color: $palette-yellow400;
+        }
+    }
+    & .choices {
+        &:focus, &:focus-within {
+            .choices__list.choices__list--single {
+                color: $palette-yellow400;
+            }
+        }
+    }
+
+    &__submit,
+    &__select:not(.choices__input),
+    & .choices .choices__list.choices__list--single {
+        color: $palette-white;
+        font-weight: 500;
+        font-size: 1.188rem; // 19px;
+        text-transform: uppercase;
+        font-family: 'Roboto', sans-serif;
+        background-repeat: no-repeat;
+        background-position-y: center;
+        background-position-x: calc(100% - (var(--uic-calculator__select-arrow--size) / 2));
+        background-image: url('../images/calculator-arrow-open.svg');
+        background-size: var(--uic-calculator__select-arrow--size);
+
+
+    }
+
+    &__submit-label {
+        transition: opacity 1000ms ease;
+        &--hidden {
+            opacity: 0;
+        }
+    }
+
+    &__submit {
+        width: 100%;
+        height: 100%;
+        appearance: none;
+        text-align: left;
+        background-color: $palette-red400;
+        transition: background-color 333ms ease, opacity 1000ms ease;
+
+        padding:
+            0 calc(
+                var(--uic-calculator__select-arrow--size)
+                +
+                (2 * var(--uic-calculator__select--side-padding))
+            )
+            0 var(--uic-calculator__select--side-padding);
+
+        &:not(:disabled):hover {
+            cursor: pointer;
+            background-color: scale-color($palette-red400, $lightness: -20%);
+        }
+        &:not(:disabled):focus {
+            background-color: scale-color($palette-red400, $lightness: -20%);
+            outline: 2.5px solid $palette-yellow400;
+            color: $palette-yellow400;
+        }
+
+        &:disabled {
+            background-color: $palette-blue900;
+            opacity: 0.25;
+        }
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 979px) {
+    .uic-calculator__questionnaire {
+        grid-template-columns: 1fr;
+    }
+    .uic-calculator__submit-label {
+        overflow: hidden;
+        transition: opacity 1000ms ease, height 1000ms ease;
+        transition-delay: 250ms, 0ms;
+
+    }
+    .uic-calculator__submit-label--hidden {
+        opacity: 0;
+        height: 0;
+    }
+    .uic-calculator__breakdown {
+        margin: 0 36px 0 36px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    .uic {
+        --uic-calculator__results__close--size: 16px;
+        --uic-calculator__results__close--offset: 16px;
+    }
+
+    .uic-calculator {
+        font-weight: 400;
+        background-position: -80px 50%;
+
+        &__line-item {
+            &__tuition, &__differential, &__attendance, &__books, &__housing-variable, &__personal, &__transportation, &__total, &__choices, &__variable, &__fees {
+                &-label, &-value, &-symbol, &-desc {
+                    // font-size: 1.5rem; // 24px; // 18pt;
+                    // line-height: 1.813rem; // 29px; // 21.9pt;
+                    font-size: 1.125rem; // 18px;
+                    line-height: 1.375rem; // 22px;
+                }
+            }
+        }
+
+        &__footer {
+            column-count: 1;
+        }
+
+        &__results {
+            &--visible {
+                max-height: 300em; // magic number which affects perceived delay of results show/hide animation
+            }
+            & > .uic-h3 {
+                //font-size: 1.813rem; // 29px // 22pt;
+                //line-height: 1.65rem; // 35px; // 26.4pt
+                font-size: 1.375rem; // 22px;
+                line-height: 1.688rem; // 27px;
+            }
+            &__link {
+                font-size: 1rem; // 16px;
+            }
+            &__links {
+                &[data-links-count="4"] {
+                    grid-template-areas: "link-0 link-1"
+                                         "link-2 link-3";
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+
+            &__learn-more {
+                font-size: 1.063rem; // 17px; // 13pt;
+                line-height: 1.313rem; // 21px; // 15.6pt;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 559px) {
+    .uic-calculator {
+        &__breakdown {
+            margin: 0 24px;
+        }
+        &__results__links {
+            &[data-links-count="3"] {
+                grid-template-areas: "link-0"
+                                     "link-1"
+                                     "link-2";
+                grid-template-columns: 1fr;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .uic-calculator__results__links {
+        &[data-links-count="2"] {
+            grid-template-areas: "link-0"
+                                 "link-1";
+        }
+        &[data-links-count="4"] {
+            grid-template-areas: "link-0"
+                                 "link-1"
+                                 "link-2"
+                                 "link-3";
+
+        }
+        &[data-links-count="2"],
+        &[data-links-count="4"] {
+            grid-template-columns: 1fr;
+        }
+
+    }
+}

@@ -1,0 +1,201 @@
+.uic {
+    --uic-calendar-popup--max-width: 320px;
+    --uic-calendar-popup--x-shift: 0px;
+    --uic-calendar-popup--h-gutter: 0px;
+    --uic-calendar-popup--v-gutter: 0px;
+    --uic-calendar-popup--base-z-index: 900;
+}
+.uic-calendar-popup {
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4), 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+    background-color: $palette-white;
+    border-radius: 8px;
+    width: max-content;
+    transform: translateX(var(--uic-calendar-popup--x-shift));
+    font-weight: 500;
+    flex-direction: column;
+  
+    &__inner {
+        gap: 20px;
+        padding: 20px 20px 18px;
+        max-width: var(--uic-calendar-popup--max-width);
+        flex-direction: column;
+        display: flex;
+
+    }
+
+    &__details {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__backdrop {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: ' ';
+        opacity: 0.0;
+        display: none;
+        position: fixed;
+        transition: opacity 333ms ease;
+        background-color: $palette-blue900;
+        z-index: var(--uic-calendar-popup--base-z-index);
+        &--visible {
+            opacity: 0.66;
+        }
+        &--visible,
+        &--exiting {
+            display: block;
+        }
+    }
+    
+    &__title,
+    &__time {
+        display: block;
+        overflow-wrap: anywhere;
+        line-height: 120%;
+    }
+    &__title {
+        font-size: 1.125rem; // 18px;
+        line-height: 120%;
+    }
+
+    &__time {
+        font-size: 1rem; // 16px;
+        line-height: 120%;
+        color: $palette-gray400;
+    }
+
+    &__event, &__event:visited {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 12px;
+        color: $palette-gray700;
+        background-position: left center;
+        text-decoration: none;
+        transition: color 500ms ease;
+
+        & svg {
+            fill: $palette-gray700;
+            transition: fill 500ms ease;
+            height: 18px;
+            width: 18px;
+            padding-top: 2px;
+            flex: 0 0 18px;
+        }
+
+        &:hover, &:focus, &:focus-visible  {
+            &,  & .uic-calendar-popup__icon {
+                color: $palette-blue500;
+                fill: $palette-blue500;
+            }
+        }
+        &:active { outline: none; }
+        &:focus:not(:active), &:focus-visible:not(:active) {
+            border: 2.5px solid $palette-blue500;
+            padding: 7.5px;
+            margin: -10px;
+            border-radius: 6px;
+            outline: none;
+        }
+    }
+}
+
+
+
+
+
+@media screen and (hover: none), (pointer: coarse) {
+    .uic {
+        --uic-calendar-popup--h-gutter: 18px;
+        --uic-calendar-popup--v-gutter: min(max(48px, 15vh), 200px);
+    }
+
+    .uic-calendar__container .vanilla-calendar {
+        border-radius: 8px;
+        &-day {
+            &:nth-child(7n + 1) { --uic-calendar-popup--x-shift: 0%; } // monday
+            &:nth-child(7n + 2) { --uic-calendar-popup--x-shift: 0%; } // tuesday
+            &:nth-child(7n + 3) { --uic-calendar-popup--x-shift: 0%; } // wednesday
+            &:nth-child(7n + 4) { --uic-calendar-popup--x-shift: 0%; } // thursday
+            &:nth-child(7n + 5) { --uic-calendar-popup--x-shift: 0%; } // friday
+            &:nth-child(7n + 6) { --uic-calendar-popup--x-shift: 0%; } // saturday
+            &:nth-child(7n + 7) { --uic-calendar-popup--x-shift: 0%; } // sunday
+            &__popup {
+                border-radius: 8px;
+                transform: translate(-50%, -50%);
+                position: fixed;
+                padding: 0;
+                width: max-content;
+                display: flex;            
+                max-width: calc(100vw - (2 * var(--uic-calendar-popup--h-gutter)));
+                max-height: calc(100vh - (2 * var(--uic-calendar-popup--v-gutter)));
+                left: -5000%;
+                top: 50%;
+                
+                &.uic-calendar-popup--focused {
+                    left: 50%;
+                }
+
+                &:focus-within, &:focus, & a:focus {
+                    left: 50%;
+                }
+
+                &:after, &:before{
+                    width: 100%;
+                    height: 8px;
+                    position: absolute;
+                    display: block !important;
+                    content: " ";
+                    border: none;
+                    border-radius: 0;
+                    box-shadow: none;
+                    z-index: calc(var(--uic-calendar-popup--base-z-index) + 3);
+                }
+                &:after {
+                    top: 0;
+                    left: 50%;
+                    border-top-left-radius: 8px;
+                    border-top-right-radius: 8px;
+                    background: linear-gradient(180deg, rgba(255, 255, 255, 1.0) 0%,
+                                                        rgba(255, 255, 255, 0.9) 5%,
+                                                        rgba(255, 255, 255, 0.8) 15%,
+                                                        rgba(255, 255, 255, 0.4) 50%,
+                                                        rgba(255, 255, 255, 0.0) 100%);
+                }   
+                &:before {   
+                    bottom: 0;
+                    right: 50%;
+                    border-bottom-left-radius: 8px;
+                    border-bottom-right-radius: 8px;
+                    background: linear-gradient(0deg, rgba(255, 255, 255, 1.0) 0%,
+                                                      rgba(255, 255, 255, 0.9) 5%,
+                                                      rgba(255, 255, 255, 0.8) 15%,
+                                                      rgba(255, 255, 255, 0.4) 50%,
+                                                      rgba(255, 255, 255, 0.0) 100%);
+                }        
+            }
+        }
+    }
+    .uic-calendar-popup {
+        max-width: calc(100vw - (2 * var(--uic-calendar-popup--h-gutter)));
+        max-height: calc(100vh - (2 * var(--uic-calendar-popup--v-gutter)));
+        &__inner {
+            max-width: calc(100vw - (2 * var(--uic-calendar-popup--h-gutter)));
+        }
+        width: auto;
+        overflow-y: auto;        
+
+        border-radius: 8px;
+        
+        & a {
+            pointer-events: none;
+        }
+
+        .uic-calendar-popup--activated  & a {
+            pointer-events: unset;
+        }
+    }
+}

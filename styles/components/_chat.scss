@@ -1,0 +1,141 @@
+/**
+ * This following line contains css injected (inline) by the chat widget but when fails to load, these styles are not present.
+ * In order for our faked chat widget to appear correctly, we must have these styles. And because the chat widget script
+ * decided not to inject, we'll have to bring them ourselves. In the came where the chat script successfully loads but after
+ * the fake chat has been added to the DOM, all the fake chat's selectors/ids have the --fake suffix to avoid their script
+ * picking up our DOM nodes and thinking chat has already been loaded.
+ */
+.siClosed--fake{transform-origin:right 95% 0;transform:translate(0,0) scale(.1);opacity:0;display:none}.siScale--fake{z-index:999999999!important;display:visible;transform:scale(1);transform-origin:right 95% 0;transition:transform .25s ease-in-out,opacity .13s linear .15s,-webkit-transform .3s ease-in-out;opacity:1}#siWidget-chat--fake{position:fixed;right:25px;height:calc(100% - 150px);bottom:90px;width:360px;min-height:260px;max-height:590px;-webkit-box-shadow:0 5px 30px rgba(0,0,0,.15)!important;box-shadow:0 5px 30px rgba(0,0,0,.15)!important;border-radius:6px;overflow:hidden!important;display:none;z-index:9999999;background:none;border:0}
+/* everything below is custom */
+
+
+
+body {
+    // prevents body from overflowing when chat is open
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+.uic {
+    --uic-chat--margin: 16px;
+    --uic-chat--top-offset: calc(
+        var(--uic-navbar--margin-top)
+        + var(--uic-navbar--height)
+        + var(--uic-fab--top-offset)
+        + var(--uic-fab--size)
+    );
+}
+
+.uic #social-intents-tab-chat {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+
+.uic-chat {
+    &__failsafe {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        background: #f9fafb;
+        height: 100%; 
+        width: 100%;
+
+        &-msg-container {
+            flex: 1 1 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &-msg {
+            font-size: 1rem; // 16px;
+            color: #999;
+            letter-spacing: 0.25px;
+            text-align: center;
+            font-weight: 500;
+            line-height: 120%;
+            padding: 16px;
+        }
+    }
+    &__close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 101;
+        content: ' ';
+        background-color: $palette-blue900;
+        background-image: url('../../images/chat-close.svg');
+        background-size: 18px;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 38px;
+        height: 38px;
+        cursor: pointer;
+    
+        &:hover {
+            background-image: url('../../images/chat-close--hover.svg');
+        }
+    }
+    &__bar {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: $palette-blue900;
+        width: 100%;
+        box-sizing: border-box;
+        z-index: 100;
+        text-align: center;
+        padding: 10px 10px 8px;
+        text-decoration: none;
+        color: $palette-white;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20px;
+        overflow-wrap: break-word;
+        -webkit-font-smoothing: antialiased;
+    }
+}
+
+.uic #siWidget-chat[style], .uic #siWidget-chat,
+.uic #siWidget-chat--fake[style], .uic #siWidget-chat--fake {
+    display: none !important;
+    right: 0px;
+    bottom: 0px;
+    top: unset;
+    left: unset;
+    margin: var(--uic-chat--margin);
+    max-width: calc(100% - (2 * var(--uic-chat--margin)));
+    max-height: min(
+        380px,  
+        calc(100% - (var(--uic-chat--margin) * 2))
+    ) !important;
+    min-height: min(
+        240px,
+        calc(100% - (var(--uic-chat--margin) * 2))
+    );
+
+    & iframe {
+        height: 100%;
+    }
+
+    &.siScale, &.siScale--fake {
+        display: none !important;
+    }   
+
+    &.uic-chat--ready.siScale,
+    &.uic-chat--ready.siScale--fake {
+        display: block !important;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .uic #siWidget-chat[style],
+    .uic #siWidget-chat[style]--fake {
+        width: calc(100% - (2 * var(--uic-chat--margin))) !important;
+    }
+}

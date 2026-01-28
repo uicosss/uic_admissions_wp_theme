@@ -1,0 +1,21 @@
+// Breakpoints
+$bp-mobile: 375px;
+$bp-tablet: 768px;
+$bp-desktop: 960px;
+$bp-max: 2000px;
+
+// Max Widths
+$page-max-width: 1366px;
+
+// Animations
+$duration: 0.5s;
+$duration2: 0.3s;
+
+.sr-only {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}

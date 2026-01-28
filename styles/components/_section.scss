@@ -1,0 +1,68 @@
+// Section
+//
+// Markup: ../../styleguide/components/section.hbs
+//
+// Styleguide Components.Section
+
+.uic {
+    --uic-section__container--max-width: 1366px;
+    --uic-section__container--max-width--wrapped: calc(var(--uic-section__container--max-width) - (2*var(--uic-section__container--margin)));
+    --uic-section__container--margin: 57px;
+    --uic-section__inner--padding: 15px;
+}
+
+.uic-section  {
+
+    overflow-x: clip;
+    
+    &__container {
+        max-width: var(--uic-section__container--max-width--wrapped);
+        padding: 0 var(--uic-section__container--margin);
+        margin: 0 auto;
+    }
+    &__inner {
+        padding-left: var(--uic-section__inner--padding);
+        padding-right:  var(--uic-section__inner--padding);
+        position: relative;       
+
+        &--no-padding, &--never-padding {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    &__label {
+        width: 135px;
+        height: 31px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0; 
+        left:  var(--uic-section__inner--padding);
+        background-color: $palette-blue900;
+        
+        & .uic-h2 {
+            color: $palette-white;
+            text-transform: uppercase;
+            line-height: 1.563rem; // 25px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 767px) {
+    .uic {
+        --uic-section__container--margin: 0;
+        --uic-section__inner--padding: 11px;
+
+        &-section{
+            &__inner {
+                &--no-padding {
+                    padding-left: var(--uic-section__inner--padding);
+                    padding-right: var(--uic-section__inner--padding);
+                }
+            }
+        }
+    }
+}
