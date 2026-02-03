@@ -1,5 +1,9 @@
 {
-    "require": {
-        "guzzlehttp/guzzle": "^7.5"
-    }
+  "name": "thirdwave/uic-admissions-wordpress-theme",
+  "description": "Thirdwave LLC's custom base theme for UIC Admissions",
+  "type": "wordpress-theme",
+  "require": {
+    "composer/installers": "^1.0",
+    "guzzlehttp/guzzle": "^7.5"
+  }
 }
