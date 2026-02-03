@@ -44,7 +44,7 @@ foreach ($linksArray as $key=>$linkArray) {
 	}
 }
 
-if ($events !== null) {
+if ($events !== null && is_array($events)) {
     foreach ($events as $event) {
 
 		if (time() > $event['timestamp_start']) {
