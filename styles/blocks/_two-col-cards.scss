@@ -1,0 +1,120 @@
+.two-col-cards {
+  --tcc-label-bg: #0b2a6f; /* replace label background */
+  --tcc-label-fg: #ffffff; /* replace label text */
+  --tcc-title: #5b5b5b; /* replace main title color */
+  --tcc-text: #7a7a7a; /* replace body text color */
+  --tcc-link: #0b2a6f; /* replace link color */
+  --tcc-underline: #7a4cff; /* replace underline accent */
+
+  width: 100%;
+
+  &__inner {
+    padding-top: 80px;
+    padding-bottom: 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    margin: 22px 0 0;
+    text-align: center;
+    color: #5b5b5b;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+    margin-top: 32px;
+  }
+
+  &__card {
+    min-width: 0;
+  }
+
+  &__media {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    background: #f3f3f3;
+    overflow: hidden;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__content {
+    padding-top: 24px;
+  }
+
+  &__card-title {
+    margin-bottom: 12px;
+    color: $palette-gray500;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 26px;
+  }
+
+  &__text {
+    color: #7a7a7a;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+
+    p { margin: 0; }
+  }
+
+.two-col-cards__link {
+  display: block;
+  margin-top: 48px;
+
+  color: $palette-blue900;
+
+  font-family: "Roboto", sans-serif;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 26px;
+
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+
+  text-transform: uppercase;
+}
+
+  .two-col-cards__card:nth-child(1) .two-col-cards__link {
+    text-align: right;
+  }
+
+  .two-col-cards__card:nth-child(2) .two-col-cards__link {
+    text-align: left;
+  }
+
+  @media (max-width: 699px) {
+    &__inner {
+      padding-top: 64px;
+      padding-bottom: 48px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    &__header {
+      margin-bottom: 36px;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+      align-items: stretch;
+    }
+  }
+}

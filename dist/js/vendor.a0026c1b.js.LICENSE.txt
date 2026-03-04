@@ -11,7 +11,7 @@
  * @license MIT
  */
 
-/*! @vimeo/player v2.18.0 | (c) 2022 Vimeo | MIT License | https://github.com/vimeo/player.js */
+/*! @vimeo/player v2.20.1 | (c) 2023 Vimeo | MIT License | https://github.com/vimeo/player.js */
 
 /*! Native Promise Only
     v0.8.1 (c) Kyle Simpson

@@ -182,6 +182,16 @@ function acf_blocks_init()
         'mode'              => 'edit',
         'keywords'          => []
     ));
+    acf_register_block_type(array(
+        'name'              => 'two-col-cards',
+        'title'             => __('Two Col Cards'),
+        'description'       => __(''),
+        'render_template'   => 'template-parts/blocks/two-col-cards.php',
+        'category'          => 'blocks',
+        'icon'              => 'marker',
+        'mode'              => 'edit',
+        'keywords'          => []
+    ));
 }
 
 // Check if function exists and hook into setup.
