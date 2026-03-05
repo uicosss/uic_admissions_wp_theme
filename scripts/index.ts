@@ -12,3 +12,4 @@ import './feedback';
 import './skip-to-content';
 import './social-slider-a11y';
 import '../styles/index.scss';
+import './tab-checklist';
