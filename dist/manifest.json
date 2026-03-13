@@ -1,16 +1,9 @@
 {
-  "client.css": "css/client.49c7bf84.css",
-  "client.js": "js/client.10d19ff9.js",
-  "panini.css": "css/panini.49c7bf84.css",
-  "panini.js": "js/panini.9425eadd.js",
-  "runtime.js": "js/runtime.500caee1.js",
-  "vendor.css": "css/vendor.b6a50446.css",
-  "vendor.js": "js/vendor.6b2e1528.js",
-  "client.49c7bf84.css.map": "css/client.49c7bf84.css.map",
-  "client.10d19ff9.js.map": "js/client.10d19ff9.js.map",
-  "panini.49c7bf84.css.map": "css/panini.49c7bf84.css.map",
-  "panini.9425eadd.js.map": "js/panini.9425eadd.js.map",
-  "runtime.500caee1.js.map": "js/runtime.500caee1.js.map",
-  "vendor.b6a50446.css.map": "css/vendor.b6a50446.css.map",
-  "vendor.6b2e1528.js.map": "js/vendor.6b2e1528.js.map"
+  "client.css": "css/client.6e308041.css",
+  "client.js": "js/client.43b83c30.js",
+  "panini.css": "css/panini.6e308041.css",
+  "panini.js": "js/panini.2ec3c8ad.js",
+  "runtime.js": "js/runtime.1ce310fd.js",
+  "vendor.css": "css/vendor.d51e77c4.css",
+  "vendor.js": "js/vendor.e438f1dc.js"
 }
