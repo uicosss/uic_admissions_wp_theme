@@ -192,6 +192,26 @@ function acf_blocks_init()
         'mode'              => 'edit',
         'keywords'          => []
     ));
+    acf_register_block_type(array(
+        'name'              => 'tab-checklist',
+        'title'             => __('Tab Checklist'),
+        'description'       => __(''),
+        'render_template'   => 'template-parts/blocks/tab-checklist.php',
+        'category'          => 'blocks',
+        'icon'              => 'marker',
+        'mode'              => 'edit',
+        'keywords'          => []
+    ));
+    acf_register_block_type(array(
+        'name'              => 'alert-carousel',
+        'title'             => __('Alert Carousel'),
+        'description'       => __(''),
+        'render_template'   => 'template-parts/blocks/alert-carousel.php',
+        'category'          => 'blocks',
+        'icon'              => 'marker',
+        'mode'              => 'edit',
+        'keywords'          => []
+    ));
 }
 
 // Check if function exists and hook into setup.

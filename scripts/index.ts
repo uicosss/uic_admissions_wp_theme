@@ -1,3 +1,4 @@
+import './alert-carousel';
 import './back-to-top';
 import './calculator';
 import './events';
