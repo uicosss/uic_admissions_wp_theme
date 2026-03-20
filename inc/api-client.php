@@ -2,11 +2,11 @@
 
 function get_remote_tuition_data()
 {
-    $cache_key = 'uic_tuition_cache';
+    $cache_key = 'uic_tuition_cache-new';
     $data = get_transient($cache_key);
 
     if (false === $data) {
-        // we will fix this
+        // change for live
         $api_url = 'https://uic-bound-2026.lndo.site/wp-json/tuition-calendar/v1/tuition-data';
         // get from api
         $res = wp_remote_get(
@@ -28,7 +28,7 @@ function get_remote_tuition_data()
         $data = json_decode($body, true);
 
         if (empty($data)) {
-            return false; // domnot cache empty json
+            return false; // do not cache empty json
         }
 
         // set in cache for 24 hours

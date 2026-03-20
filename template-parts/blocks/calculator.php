@@ -1,37 +1,20 @@
 <?php
 
-$differentials = [];
-$departments = get_field('differentials', 'option');
 $section_anchor = preg_replace('/[^a-zA-Z0-9]/', '-', strtolower(get_field('section_anchor')));;
 $header_text = get_field('header_text');
 
-foreach ($departments as $department) {
-    $programs = [];
-    foreach ($department['programs'] as $program) {
-        array_push($programs, [
-            'name' => $program['name'],
-            'cost' => (float)$program['cost']
-        ]);
-    }
-    array_push($differentials, [
-        'programs' => $programs,
-        'department' => $department['department']
-    ]);
-}
-
-$calculator_data = [
-    'base_tuition' => array_map(fn($value) => (float)$value, get_field('tuition', 'option')),
-    'mandatory_fees' => array_map(fn($value) => (float)$value, get_field('mandatory_fees', 'option')),
-    'elective_fees' => array_map(fn($value) => (float)$value, get_field('elective_fees', 'option')),
-    'cost_of_attendance' => array_map(fn($value) => (float)$value, get_field('cost_of_attendance', 'option')),
-    'differentials' => $differentials,
-    'result_links' => get_field('result_links', 'option')
-];
+$calculator_data = get_remote_tuition_data();
 
 ?>
 
 <script>
-	window.__UIC_CALCULATOR_DATA__ = <?=json_encode($calculator_data)?>;
+	// window.__UIC_CALCULATOR_DATA__ = <?= json_encode($calculator_data) ?>;
+	window.__UIC_CALCULATOR_DATA__ = <?php echo json_encode($calculator_data, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
+
+	if (window.__UIC_CALCULATOR_DATA__ === null) {
+		window.__UIC_CALCULATOR_DATA__ = {};
+		console.warn('UIC Calculator: Failed to load remote tuition data.');
+	}
 </script>
 
 
@@ -46,8 +29,7 @@ $calculator_data = [
 					<label
 						class="uic-calculator__prompt"
 						for="uic-calculator__select--location"
-						id="uic-calculator__select-label--location"
-					>
+						id="uic-calculator__select-label--location">
 						Where do you live?<span title="required">*</span>
 					</label>
 					<div class="uic-calculator__response">
@@ -58,8 +40,7 @@ $calculator_data = [
 							aria-labelledby="uic-calculator__select-label--location"
 							class="form-control uic-calculator__select"
 							name="location"
-							id="uic-calculator__select--location"
-						>
+							id="uic-calculator__select--location">
 							<option value="">Select A Location</option>
 							<option value="resident">Resident / In State</option>
 							<option value="non-resident">Non Resident / Out of State</option>
@@ -69,8 +50,7 @@ $calculator_data = [
 					<label
 						class="uic-calculator__prompt"
 						for="uic-calculator__select--program"
-						id="uic-calculator__select-label--program"
-					>
+						id="uic-calculator__select-label--program">
 						What program are you interested in?<span title="required">*</span>
 					</label>
 					<div class="uic-calculator__response">
@@ -81,11 +61,10 @@ $calculator_data = [
 							aria-labelledby="uic-calculator__select-label--program"
 							class="form-control uic-calculator__select"
 							name="program"
-							id="uic-calculator__select--program"
-						>
+							id="uic-calculator__select--program">
 							<option value="">Select A Program</option>
 							<?php
-							foreach ($differentials as $differential) {
+							foreach ($calculator_data['differentials'] as $differential) {
 								echo '<optgroup label="' . esc_attr($differential['department']) . '">';
 								foreach ($differential['programs'] as $program) {
 									echo '<option value="' . $program['cost'] . '">' . $program['name'] . '</option>';
@@ -98,8 +77,7 @@ $calculator_data = [
 					<label
 						class="uic-calculator__prompt"
 						for="uic-calculator__select--housing"
-						id="uic-calculator__select-label--housing"
-					>
+						id="uic-calculator__select-label--housing">
 						Will you live on-campus?<span title="required">*</span>
 					</label>
 					<div class="uic-calculator__response">
@@ -110,8 +88,7 @@ $calculator_data = [
 							aria-labelledby="uic-calculator__select-label--housing"
 							class="form-control uic-calculator__select"
 							name="housing"
-							id="uic-calculator__select--housing"
-						>
+							id="uic-calculator__select--housing">
 							<option value="">Select Housing Needs</option>
 							<option value="on-campus">On-Campus</option>
 							<option value="off-campus">Off-Campus</option>
@@ -126,8 +103,8 @@ $calculator_data = [
 			<div class="uic-calculator__results uic-calculator__results">
 				<button type="button" class="uic-calculator__results-close" title="Close results">
 					<svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64">
-						<use class="uic-calculator__results-close--default" xlink:href="<?= THEME_ASSET_BASE ?>/images/calculator-results-close.svg#uic-calculator__results-close"/>
-						<use class="uic-calculator__results-close--hover" xlink:href="<?= THEME_ASSET_BASE ?>/images/calculator-results-close.svg#uic-calculator__results-close--hover"/>
+						<use class="uic-calculator__results-close--default" xlink:href="<?= THEME_ASSET_BASE ?>/images/calculator-results-close.svg#uic-calculator__results-close" />
+						<use class="uic-calculator__results-close--hover" xlink:href="<?= THEME_ASSET_BASE ?>/images/calculator-results-close.svg#uic-calculator__results-close--hover" />
 					</svg>
 					<span class="sr-only">Close results</span>
 				</button>
@@ -154,21 +131,21 @@ $calculator_data = [
 						0
 					</div>
 					<div class="uic-calculator__line-item__divider-1"></div>
-                    <div class="uic-calculator__line-item__housing-estimate-label">
-                        Housing and Food Expenses
-                    </div>
-                    <div class="uic-calculator__line-item__housing-estimate-symbol">
-                        $
-                    </div>
-                    <div class="uic-calculator__line-item__housing-estimate-value">
-                        0
-                    </div>
-                    <div class="uic-calculator__line-item__fees-label">
+					<div class="uic-calculator__line-item__housing-estimate-label">
+						Housing and Food Expenses
+					</div>
+					<div class="uic-calculator__line-item__housing-estimate-symbol">
+						$
+					</div>
+					<div class="uic-calculator__line-item__housing-estimate-value">
+						0
+					</div>
+					<div class="uic-calculator__line-item__fees-label">
 						Mandatory Fees
 					</div>
-                    <div class="uic-calculator__line-item__fees-desc">
-                        Student fees, health insurance, assessments
-                    </div>
+					<div class="uic-calculator__line-item__fees-desc">
+						Student fees, health insurance, assessments
+					</div>
 					<div class="uic-calculator__line-item__fees-symbol">
 						$
 					</div>
@@ -179,9 +156,9 @@ $calculator_data = [
 					<div class="uic-calculator__line-item__attendance-label">
 						Estimated Costs Billed by the University
 					</div>
-                    <div class="uic-calculator__line-item__attendance-symbol">
-                        $
-                    </div>
+					<div class="uic-calculator__line-item__attendance-symbol">
+						$
+					</div>
 					<div class="uic-calculator__line-item__attendance-value">
 						0
 					</div>
@@ -225,9 +202,9 @@ $calculator_data = [
 						0
 					</div>
 					<div class="uic-calculator__line-item__divider-3 "></div>
-                    <div class="uic-calculator__line-item__variable-label">
-                        Total Variable Expenses
-                    </div>
+					<div class="uic-calculator__line-item__variable-label">
+						Total Variable Expenses
+					</div>
 					<div class="uic-calculator__line-item__variable-symbol">
 						$
 					</div>
@@ -244,7 +221,7 @@ $calculator_data = [
 					<div class="uic-calculator__line-item__total-value">
 						0
 					</div>
-                    <div class="uic-calculator__line-item__divider-5 "></div>
+					<div class="uic-calculator__line-item__divider-5 "></div>
 				</div>
 				<div class="uic-calculator__results__learn-more-container">
 					<a href="https://admissions.uic.edu/undergraduate/tuition-financial-aid" target="_blank" title="Learn more about tuition from the UIC Registrar" class="uic-calculator__results__learn-more">Learn More</a>
@@ -258,7 +235,7 @@ $calculator_data = [
 					<p><span>Fees and Assessments:</span> Billed. Support a range of student support services, building and technology at UIC. Health insurance can be waived if you have existing and equivalent coverage.</p>
 					<p><span>Books and Supplies:</span> Estimate. Expenses may vary depending on the courses you are taking.</p>
 					<p><span>Housing and Food:</span> Estimate. UIC students are not required to live on campus, but rates range based on room selection and meal plan.</p>
-                    <p><span>Personal Expenses:</span> Estimate.</p>
+					<p><span>Personal Expenses:</span> Estimate.</p>
 					<p><span>Transportation:</span> Estimate.</p>
 				</div>
 			</div>
