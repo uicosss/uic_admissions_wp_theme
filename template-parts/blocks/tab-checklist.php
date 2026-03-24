@@ -134,7 +134,7 @@ $panel_right_id = $uid . '--panel-right';
         <?php endif; ?>
 
         <?php if (!empty($tab_left_links)) : ?>
-          <div class="tab-checklist__links">
+          <div class="uic-cta-footer__container">
             <?php foreach ($tab_left_links as $row) :
               $link = $row['link'] ?? null;
               if (!is_array($link) || empty($link['url'])) continue;
@@ -144,7 +144,7 @@ $panel_right_id = $uid . '--panel-right';
               $target = !empty($link['target']) ? $link['target'] : '';
             ?>
               <a
-                class="tab-checklist__link"
+                class="uic-cta-footer__link uic-cta-footer__link__white"
                 href="<?php echo esc_url($url); ?>"
                 <?php echo $target ? 'target="' . esc_attr($target) . '" rel="noopener noreferrer"' : ''; ?>
               >
@@ -213,7 +213,7 @@ $panel_right_id = $uid . '--panel-right';
         <?php endif; ?>
 
         <?php if (!empty($tab_right_links)) : ?>
-          <div class="tab-checklist__links">
+          <div class="uic-cta-footer__container">
             <?php foreach ($tab_right_links as $row) :
               $link = $row['link'] ?? null;
               if (!is_array($link) || empty($link['url'])) continue;
@@ -223,7 +223,7 @@ $panel_right_id = $uid . '--panel-right';
               $target = !empty($link['target']) ? $link['target'] : '';
             ?>
               <a
-                class="tab-checklist__link"
+                class="uic-cta-footer__link uic-cta-footer__link__white"
                 href="<?php echo esc_url($url); ?>"
                 <?php echo $target ? 'target="' . esc_attr($target) . '" rel="noopener noreferrer"' : ''; ?>
               >

@@ -1,11 +1,4 @@
 .two-col-cards {
-  --tcc-label-bg: #0b2a6f; /* replace label background */
-  --tcc-label-fg: #ffffff; /* replace label text */
-  --tcc-title: #5b5b5b; /* replace main title color */
-  --tcc-text: #7a7a7a; /* replace body text color */
-  --tcc-link: #0b2a6f; /* replace link color */
-  --tcc-underline: #7a4cff; /* replace underline accent */
-
   &__inner {
     padding-top: 80px;
     padding-bottom: 48px;
@@ -80,12 +73,16 @@
   font-weight: 500;
   line-height: 26px;
 
-  text-decoration-line: underline;
-  text-decoration-style: solid;
-  text-decoration-skip-ink: none;
-  text-decoration-thickness: auto;
-  text-underline-offset: auto;
-  text-underline-position: from-font;
+  text-decoration: underline;
+  text-transform: uppercase;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+  transition: text-underline-offset 400ms ease-in-out,
+  text-decoration-color 400ms ease;
+  &:hover {
+    text-decoration-color: $palette-yellow400;
+    text-underline-offset: 8px;
+  }
 
   text-transform: uppercase;
 }
@@ -113,6 +110,8 @@
     &__grid {
       grid-template-columns: 1fr;
       align-items: stretch;
+      padding-left: 11px;
+      padding-right: 11px;
     }
   }
 }
