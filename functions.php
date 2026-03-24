@@ -37,7 +37,6 @@ require_once(__DIR__ . '/inc/thumbnails.php');
 require_once(__DIR__ . '/inc/api-provider.php');
 require_once(__DIR__ . '/inc/api-client.php');
 
-
 // DELETE when complete
 add_filter('template_include', 'var_template_include', 1000);
 function var_template_include($t)

@@ -12,7 +12,7 @@ add_action('rest_api_init', function () {
     ));
 });
 
-function get_tuition_data($req)
+function get_tuition_data()
 {
     // from my understatnding the data will live within wordpress?
     // so perhaps there will some handling up here?
