@@ -33,9 +33,15 @@ require_once(__DIR__ . '/inc/acf-blocks.php');
 // Custom Thumbnails
 require_once(__DIR__ . '/inc/thumbnails.php');
 
-// Load Tuition Calculator API
-require_once(__DIR__ . '/inc/api-provider.php');
-require_once(__DIR__ . '/inc/api-client.php');
+// Tuition Calculator API
+// Only load the Provider and if the site role is correct
+if (defined('UIC_SITE_ROLE') && UIC_SITE_ROLE === 'provider') {
+    require_once(__DIR__ . '/inc/api-provider.php');
+    require_once(__DIR__ . '/inc/api-client.php');
+} else {
+    require_once(__DIR__ . '/inc/api-client.php');
+}
+
 
 // DELETE when complete
 add_filter('template_include', 'var_template_include', 1000);

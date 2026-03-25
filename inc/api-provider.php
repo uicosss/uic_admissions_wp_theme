@@ -14,9 +14,11 @@ add_action('rest_api_init', function () {
 
 function get_tuition_data()
 {
-    // from my understatnding the data will live within wordpress?
-    // so perhaps there will some handling up here?
-
+    /* 
+        This data resides within the 
+        ACF theme options page: calulator-config 
+        (Theme Config -> Calculator Config)
+    */
     $differentials = [];
     $departments = get_field('differentials', 'option');
 

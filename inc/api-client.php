@@ -7,7 +7,7 @@ function get_remote_tuition_data()
 
     if (false === $data) {
         // change for live
-        $api_url = 'https://uic-bound-2026.lndo.site/wp-json/tuition-calendar/v1/tuition-data';
+        $api_url = CALC_API_ENDPOINT;
         // get from api
         $res = wp_remote_get(
             $api_url,
