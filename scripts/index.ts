@@ -1,3 +1,4 @@
+import './alert-carousel';
 import './back-to-top';
 import './calculator';
 import './events';
@@ -12,3 +13,4 @@ import './feedback';
 import './skip-to-content';
 import './social-slider-a11y';
 import '../styles/index.scss';
+import './tab-checklist';
