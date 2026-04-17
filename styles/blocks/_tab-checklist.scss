@@ -23,6 +23,7 @@
 
   &__header {
     text-align: center;
+    margin-bottom: 24px;
   }
 
   &__text {
@@ -72,25 +73,6 @@
   &__tab:focus-visible {
     outline: 3px solid rgba(255, 255, 255, 0.75);
     outline-offset: 4px;
-  }
-
-  /* Mobile: stack tabs; selected = gold fill, not selected = white card */
-  @media (max-width: 699px) {
-    &__tabs {
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    &__tab {
-      text-align: left;
-      padding: 24px;
-    }
-
-    &__tab:not(.is-active) {
-      margin: 0;
-      padding: 24px;
-    }
   }
 
   &__accordion {
@@ -214,6 +196,9 @@
     font-style: normal;
     font-weight: 400;
     line-height: 26px;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
 
     p { margin: 0 0 12px; }
     p:last-child { margin-bottom: 0; }
@@ -225,6 +210,13 @@
     }
 
     li { margin: 6px 0; }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      max-width: 100%;
+    }
   }
 
   &__divider {
@@ -241,6 +233,24 @@
 
     p { margin: 0; }
   }
+
+  // --- Added New Styling for footer_text ---
+  &__footer-text {
+    margin-top: 16px;
+    color: rgba(0, 30, 98, 0.75);
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.5;
+
+    p {
+      margin: 0 0 8px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  // -----------------------------------------
 
   &__note {
     padding: 16px;
@@ -268,5 +278,38 @@
     font-size: 17px;
     line-height: 26px;
     text-decoration: underline;
+  }
+
+  /* Mobile */
+  @media (max-width: 699px) {
+    &__text p {
+      color: #FFF;
+      font-family: Roboto;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 30px;
+    }
+
+    &__tab {
+      text-align: left;
+      padding: 24px;
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 30px;
+    }
+
+    &__tab:not(.is-active) {
+      margin: 0;
+      padding: 24px;
+    }
+
+    &__itemtitle{
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 30px;
+    }
   }
 }

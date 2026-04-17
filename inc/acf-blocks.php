@@ -143,11 +143,21 @@ function acf_blocks_init()
     ));
     acf_register_block_type(array(
         'name'              => 'cta-footer',
-        'title'             => __('CTA Footer'),
+        'title'             => __('CTA Links'),
         'description'       => __(''),
         'render_template'   => 'template-parts/blocks/cta-footer.php',
         'category'          => 'blocks',
         'icon'              => 'insert',
+        'mode'              => 'edit',
+        'keywords'          => []
+    ));
+    acf_register_block_type(array(
+        'name'              => 'accordion',
+        'title'             => __('Accordion'),
+        'description'       => __(''),
+        'render_template'   => 'template-parts/blocks/accordion.php',
+        'category'          => 'blocks',
+        'icon'              => 'menu',
         'mode'              => 'edit',
         'keywords'          => []
     ));
@@ -212,6 +222,16 @@ function acf_blocks_init()
         'mode'              => 'edit',
         'keywords'          => []
     ));
+    acf_register_block_type(array(
+        'name'              => 'cta-section',
+        'title'             => __('CTA Section'),
+        'description'       => __(''),
+        'render_template'   => 'template-parts/blocks/cta-section.php',
+        'category'          => 'blocks',
+        'icon'              => 'marker',
+        'mode'              => 'edit',
+        'keywords'          => []
+    ));
 }
 
 // Check if function exists and hook into setup.
@@ -250,7 +270,7 @@ add_action('acf/validate_value/name=vimeo_id', 'validate_vimeo_id', 10, 4);
 /**
  * Unless we manually trigger the validation, ACF will NOT validate fields in guttenberg blocks.
  * Without this, fields that are required can be empty, numbers and string length can exceed min/max.
- * 
+ *
  * This is an issue which has been since guttenberg was introduced (like 5+ years ago) an is unresolved.
  */
 function actually_validate_acf_fields()

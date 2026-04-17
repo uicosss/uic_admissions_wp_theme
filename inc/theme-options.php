@@ -1,11 +1,10 @@
 <?php
 
 
-function register_theme_options()
-{
+function register_theme_options() {
 
     // Check function exists.
-    if (function_exists('acf_add_options_sub_page')) {
+    if( function_exists('acf_add_options_sub_page') ) {
 
         // Add parent.
         $parent = acf_add_options_page([

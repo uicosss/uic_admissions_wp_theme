@@ -298,7 +298,7 @@
                 },
                 {
                     "key": "field_6414d64722703",
-                    "label": "Housing Fee",
+                    "label": "Housing Fee (On-Campus)",
                     "name": "housing_fee",
                     "aria-label": "",
                     "type": "number",
@@ -310,7 +310,95 @@
                         "class": "",
                         "id": ""
                     },
-                    "default_value": "",
+                    "default_value": 17100,
+                    "min": "",
+                    "max": "",
+                    "placeholder": "",
+                    "step": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_69948b422af7c",
+                    "label": "Housing Fee (Off-Campus)",
+                    "name": "housing_fee_off_campus",
+                    "aria-label": "",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 15000,
+                    "min": "",
+                    "max": "",
+                    "placeholder": "",
+                    "step": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_6414f171f1f58",
+                    "label": "Transportation (Resident \/ In State)",
+                    "name": "transportation",
+                    "aria-label": "",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 1526,
+                    "min": "",
+                    "max": "",
+                    "placeholder": "",
+                    "step": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_69948c4cad7c4",
+                    "label": "Transportation (Non Resident \/ Out of State)",
+                    "name": "transportation_non_res",
+                    "aria-label": "",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 3626,
+                    "min": "",
+                    "max": "",
+                    "placeholder": "",
+                    "step": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_69948c68ad7c5",
+                    "label": "Transportation (International)",
+                    "name": "transportation_intl",
+                    "aria-label": "",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 3626,
                     "min": "",
                     "max": "",
                     "placeholder": "",
@@ -362,28 +450,6 @@
                     "key": "field_6414f165f1f57",
                     "label": "Personal",
                     "name": "personal",
-                    "aria-label": "",
-                    "type": "number",
-                    "instructions": "",
-                    "required": 1,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "min": "",
-                    "max": "",
-                    "placeholder": "",
-                    "step": "",
-                    "prepend": "",
-                    "append": ""
-                },
-                {
-                    "key": "field_6414f171f1f58",
-                    "label": "Transportation",
-                    "name": "transportation",
                     "aria-label": "",
                     "type": "number",
                     "instructions": "",
@@ -510,6 +576,27 @@
                             "max": "",
                             "placeholder": "",
                             "step": "",
+                            "prepend": "",
+                            "append": "",
+                            "parent_repeater": "field_6414dc0a76eac"
+                        },
+                        {
+                            "key": "field_69ab07c4c46e8",
+                            "label": "Slug",
+                            "name": "slug",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": 255,
+                            "placeholder": "",
                             "prepend": "",
                             "append": "",
                             "parent_repeater": "field_6414dc0a76eac"
@@ -658,6 +745,26 @@
                     ]
                 }
             ]
+        },
+        {
+            "key": "field_69b8808a13d8e",
+            "label": "Footer Content",
+            "name": "footer_content",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
         }
     ],
     "location": [
@@ -678,6 +785,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "display_title": "",
-    "modified": 1774465229
+    "modified": 1774372164
 }

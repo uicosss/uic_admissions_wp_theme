@@ -4,10 +4,10 @@
     }
 
     &__day--selected {
-        color: $palette-yellow400;
+        color: $palette-yellow300;
     }
     &__day--focused {
-        box-shadow: inset 0px 0px 0px 2px $palette-yellow400;
+        box-shadow: inset 0px 0px 0px 2px $palette-yellow300;
     }
 
 
@@ -52,7 +52,7 @@
                 &::before, &::after {
                     left: 45%;
                     transition: background-color 333ms ease;
-                    background-color: $palette-yellow400;
+                    background-color: $palette-yellow300;
                     height: 2px;
                 }
                 transition: transform 333ms ease-out;
@@ -99,7 +99,7 @@
                         background-color: rgba(0, 0, 0, 0.2);
                     }
                     &.uic-calendar__day--selected {
-                        color: $palette-yellow400;
+                        color: $palette-yellow300;
                     }
                 }
 
@@ -227,7 +227,7 @@
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
                 &:hover {
-                    color: $palette-yellow400;
+                    color: $palette-yellow300;
                 }
             }
             &-wrapper {

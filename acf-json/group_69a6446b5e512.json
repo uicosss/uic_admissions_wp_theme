@@ -63,9 +63,35 @@
             "delay": 0
         },
         {
+            "key": "field_69debcd8da36c",
+            "label": "Orientation",
+            "name": "orientation",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "default": "Default",
+                "flipped": "Flipped"
+            },
+            "default_value": "default",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "allow_in_bindings": 0,
+            "layout": "vertical",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_69a644b6749ba",
-            "label": "Tab Left Label",
-            "name": "tab_left_label",
+            "label": "Set A Label",
+            "name": "set_a_label",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -78,14 +104,15 @@
             },
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
             "prepend": "",
             "append": ""
         },
         {
             "key": "field_69a8841655528",
-            "label": "Tab Left Items",
-            "name": "tab_left_items",
+            "label": "Set A Items",
+            "name": "set_a_items",
             "aria-label": "",
             "type": "repeater",
             "instructions": "",
@@ -96,7 +123,7 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "table",
+            "layout": "row",
             "pagination": 0,
             "min": 0,
             "max": 0,
@@ -171,8 +198,8 @@
         },
         {
             "key": "field_69a8856455532",
-            "label": "Tab Left Note",
-            "name": "tab_left_note",
+            "label": "Set A Note",
+            "name": "set_a_note",
             "aria-label": "",
             "type": "textarea",
             "instructions": "",
@@ -185,14 +212,15 @@
             },
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
             "rows": "",
             "placeholder": "",
             "new_lines": ""
         },
         {
             "key": "field_69a88582ade42",
-            "label": "Tab Left Links",
-            "name": "tab_left_links",
+            "label": "Set A Links",
+            "name": "set_a_links",
             "aria-label": "",
             "type": "repeater",
             "instructions": "",
@@ -232,8 +260,8 @@
         },
         {
             "key": "field_69a883c755527",
-            "label": "Tab Right Label",
-            "name": "tab_right_label",
+            "label": "Set B Label",
+            "name": "set_b_label",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -246,14 +274,15 @@
             },
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
             "prepend": "",
             "append": ""
         },
         {
             "key": "field_69a884575552b",
-            "label": "Tab Right Items",
-            "name": "tab_right_items",
+            "label": "Set B Items",
+            "name": "set_b_items",
             "aria-label": "",
             "type": "repeater",
             "instructions": "",
@@ -264,7 +293,7 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "table",
+            "layout": "row",
             "pagination": 0,
             "min": 0,
             "max": 0,
@@ -339,8 +368,8 @@
         },
         {
             "key": "field_69a8859dade44",
-            "label": "Tab Right Note",
-            "name": "tab_right_note",
+            "label": "Set B Note",
+            "name": "set_b_note",
             "aria-label": "",
             "type": "textarea",
             "instructions": "",
@@ -353,14 +382,15 @@
             },
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
             "rows": "",
             "placeholder": "",
             "new_lines": ""
         },
         {
             "key": "field_69a885b3ade45",
-            "label": "Tab Right Links",
-            "name": "tab_right_links",
+            "label": "Set B Links",
+            "name": "set_b_links",
             "aria-label": "",
             "type": "repeater",
             "instructions": "",
@@ -417,5 +447,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1772663037
+    "display_title": "",
+    "modified": 1776280105
 }

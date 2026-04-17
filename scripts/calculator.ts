@@ -10,11 +10,14 @@ export interface SerializedCalculatorData {
     cost_of_attendance: {
         books: number;
         personal: number;
-        transportation: number;
     };
     elective_fees: {
         insurance_fee: number;
         housing_fee: number;
+        housing_fee_off_campus: number;
+        transportation: number;
+        transportation_non_res: number;
+        transportation_intl: number;
     };
     mandatory_fees: {
         assessment_fee: number;
@@ -63,6 +66,7 @@ const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'decimal' });
 const formatCurrency = (n) => currencyFormatter.format(Math.ceil(n));
 
 onReady(() => {
+    const differentials = window.__UIC_CALCULATOR_DATA__.differentials.length > 0 ? window.__UIC_CALCULATOR_DATA__.differentials : null;
     const calculators = document.querySelectorAll<HTMLDivElement>('.uic-calculator');
     for (const calculator of calculators) {
 
@@ -80,7 +84,7 @@ onReady(() => {
         checkSelector(selectEls.program, 'program select');
         checkSelector(selectEls.housing, 'housing select');
 
-        const locationSelect = new Choices(selectEls.location, {
+        let locationSelect = new Choices(selectEls.location, {
             allowHTML: true,
             shouldSort: false,
             resetScrollPosition: false,
@@ -89,7 +93,7 @@ onReady(() => {
             removeItemButton: false,
             labelId: 'uic-calculator__select-label--location'
         });
-        const programSelect = new Choices(selectEls.program, {
+        let programSelect = new Choices(selectEls.program, {
             allowHTML: true,
             shouldSort: false,
             resetScrollPosition: false,
@@ -98,7 +102,7 @@ onReady(() => {
             removeItemButton: false,
             labelId: 'uic-calculator__select-label--program'
         });
-        const housingSelect = new Choices(selectEls.housing, {
+        let housingSelect = new Choices(selectEls.housing, {
             allowHTML: true,
             shouldSort: false,
             resetScrollPosition: false,
@@ -143,6 +147,7 @@ onReady(() => {
                 fees: 0,
                 universityCharge: 0,
                 variableExpenses: 0,
+                transportation: 0,
                 grandTotal: 0
             }
         };
@@ -171,6 +176,52 @@ onReady(() => {
                 submitButton.setAttribute('disabled', String(true));
             }
         };
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        const locationParam = String(urlParams.get('location'));
+        const programParam = String(urlParams.get('program'));
+        const housingParam = String(urlParams.get('housing'));
+
+        if (locationParam.length > 0 && programParam.length > 0 && housingParam.length > 0) {
+            let locationFound = false;
+            if (['resident', 'non-resident', 'international'].includes(locationParam)) {
+                values.location = locationParam;
+                locationSelect.setChoiceByValue(locationParam);
+                locationFound = true;
+            }
+
+            let programFound = false;
+            for (let differential of differentials) {
+                for (let program of differential.programs) {
+                    if (program.slug === programParam) {
+                        values.program = program.cost;
+                        programSelect.setChoiceByValue(programParam);
+                        programFound = true;
+                        break;
+                    }
+                }
+                if (programFound) {
+                    break;
+                }
+            }
+
+            let housingFound = false;
+            if (['on-campus', 'off-campus'].includes(housingParam)) {
+                values.housing = housingParam;
+                housingSelect.setChoiceByValue(housingParam);
+                housingFound = true;
+            }
+
+            updateSubmitVisibility();
+
+            const calculatorEl = document.getElementById('calculator');
+            if (calculatorEl && locationFound && programFound && housingFound) {
+                calculatorEl.scrollIntoView();
+            }
+        }
+
         selectEls.location.addEventListener('choice', (e: EventMap['choice']) => {
             const choice = e.detail.choice.value;
             const isPlaceholder = e.detail.choice.placeholder;
@@ -184,12 +235,24 @@ onReady(() => {
             updateSubmitVisibility();
         });
         selectEls.program.addEventListener('choice', (e: EventMap['choice']) => {
-            const choice = e.detail.choice.value.length ? Number.parseFloat(e.detail.choice.value) : null;
+            const choice = e.detail.choice.value.length ? e.detail.choice.value : null;
             const isPlaceholder = e.detail.choice.placeholder;
             if (isPlaceholder) {
                 values.program = null;
-            } else if (!Number.isNaN(choice) && choice !== null) {
-                values.program = choice;
+            } else if (choice.length > 0) {
+                let programFound = false;
+                for (let differential of differentials) {
+                    for (let program of differential.programs) {
+                        if (program.slug === choice) {
+                            values.program = program.cost;
+                            programFound = true;
+                            break;
+                        }
+                    }
+                    if (programFound) {
+                        break;
+                    }
+                }
             } else {
                 values.program = null;
             }
@@ -223,6 +286,17 @@ onReady(() => {
                 questionnaireEl.classList.add('uic-calculator__questionnaire-container--hidden');
                 resultsEl.classList.add('uic-calculator__results--visible');
 
+                switch(values.location) {
+                    case 'international':
+                        values.lineItems.transportation = data.elective_fees.transportation_intl;
+                        break;
+                    case 'non-resident':
+                        values.lineItems.transportation = data.elective_fees.transportation_non_res;
+                        break;
+                    default:
+                        values.lineItems.transportation = data.elective_fees.transportation;
+                }
+
                 values.lineItems.tuition = data.base_tuition[tuitionKeyMap[values.location!]];
                 values.lineItems.differential = values.program!;
                 values.lineItems.fees = (
@@ -243,9 +317,9 @@ onReady(() => {
 				;
                 values.lineItems.variableExpenses = (
                     data.cost_of_attendance.books
-                    + (values.housing === 'on-campus' ? 0 : data.elective_fees.housing_fee)
+                    + (values.housing === 'on-campus' ? 0 : data.elective_fees.housing_fee_off_campus)
                     + data.cost_of_attendance.personal
-                    + data.cost_of_attendance.transportation
+                    + values.lineItems.transportation
                 );
                 values.lineItems.grandTotal =
 					values.lineItems.universityCharge
@@ -313,12 +387,12 @@ onReady(() => {
                 housingEstimateSymbolEl.innerHTML = isOnCampus ? "$" : "";
                 housingEstimateValueEl.innerHTML = isOnCampus ? formatCurrency(data.elective_fees.housing_fee) : "listed below";
                 housingVariableSymbolEl.innerHTML = isOnCampus ? "" : "$";
-                housingVariableValueEl.innerHTML = isOnCampus ? "listed above" : formatCurrency(data.elective_fees.housing_fee);
+                housingVariableValueEl.innerHTML = isOnCampus ? "listed above" : formatCurrency(data.elective_fees.housing_fee_off_campus);
                 feesValueEl.innerHTML = formatCurrency(values.lineItems.fees);
 				attendanceValueEl.innerHTML = formatCurrency(values.lineItems.universityCharge);
                 booksValueEl.innerHTML = formatCurrency(data.cost_of_attendance.books);
                 personalValueEl.innerHTML = formatCurrency(data.cost_of_attendance.personal);
-                transportationValueEl.innerHTML = formatCurrency(data.cost_of_attendance.transportation);
+                transportationValueEl.innerHTML = formatCurrency(values.lineItems.transportation);
 				variableValueEl.innerHTML = formatCurrency(values.lineItems.variableExpenses);
                 totalValueEl.innerHTML = formatCurrency(values.lineItems.grandTotal);
                 calculator.focus();

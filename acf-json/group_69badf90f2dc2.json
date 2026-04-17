@@ -3,11 +3,11 @@
     "title": "alert carousel",
     "fields": [
         {
-            "key": "field_69bb71725beee",
-            "label": "Eyebrow",
-            "name": "eyebrow",
+            "key": "field_69de57091dd9b",
+            "label": "",
+            "name": "",
             "aria-label": "",
-            "type": "text",
+            "type": "message",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,11 +16,9 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "message": "<h2 style=\"line-height: 0;letter-spacing: 0.5px;\">Alert Carousel<\/h2>",
+            "new_lines": "wpautop",
+            "esc_html": 0
         },
         {
             "key": "field_69badf91a7e1f",
@@ -36,7 +34,7 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "table",
+            "layout": "block",
             "pagination": 0,
             "min": 0,
             "max": 0,
@@ -44,6 +42,50 @@
             "button_label": "Add Row",
             "rows_per_page": 20,
             "sub_fields": [
+                {
+                    "key": "field_69d94fdc4326b",
+                    "label": "Eyebrow Prefix",
+                    "name": "eyebrow_prefix",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_69badf91a7e1f"
+                },
+                {
+                    "key": "field_69d94fe74326c",
+                    "label": "Eyebrow Text",
+                    "name": "eyebrow_text",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_69badf91a7e1f"
+                },
                 {
                     "key": "field_69badfe8a7e20",
                     "label": "Header",
@@ -96,11 +138,12 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "40",
                         "class": "",
                         "id": ""
                     },
                     "return_format": "array",
+                    "allow_in_bindings": 1,
                     "parent_repeater": "field_69badf91a7e1f"
                 },
                 {
@@ -113,13 +156,15 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "30",
                         "class": "",
                         "id": ""
                     },
                     "display_format": "Y-m-d H:i:s",
                     "return_format": "d\/m\/Y g:i a",
                     "first_day": 1,
+                    "default_to_current_date": 0,
+                    "allow_in_bindings": 1,
                     "parent_repeater": "field_69badf91a7e1f"
                 },
                 {
@@ -132,13 +177,15 @@
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "",
+                        "width": "30",
                         "class": "",
                         "id": ""
                     },
                     "display_format": "Y-m-d H:i:s",
                     "return_format": "d\/m\/Y g:i a",
                     "first_day": 1,
+                    "default_to_current_date": 0,
+                    "allow_in_bindings": 1,
                     "parent_repeater": "field_69badf91a7e1f"
                 }
             ]
@@ -162,5 +209,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1773891962
+    "display_title": "",
+    "modified": 1776178975
 }

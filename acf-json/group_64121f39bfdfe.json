@@ -91,12 +91,12 @@
                     "append": ""
                 },
                 {
-                    "key": "field_6505f12654857",
-                    "label": "Admissions Event Category List",
-                    "name": "admission_events_category_list",
+                    "key": "field_69de5e61a1459",
+                    "label": "Mode",
+                    "name": "events_mode",
                     "aria-label": "",
-                    "type": "textarea",
-                    "instructions": "Separate multiple entries with a comma.",
+                    "type": "radio",
+                    "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -104,8 +104,43 @@
                         "class": "",
                         "id": ""
                     },
+                    "choices": {
+                        "default": "Admissions\/Academic",
+                        "arbitrary": "Arbitrary"
+                    },
+                    "default_value": "default",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "allow_in_bindings": 0,
+                    "layout": "vertical",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_6505f12654857",
+                    "label": "Admissions Event Category List",
+                    "name": "admission_events_category_list",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Separate multiple entries with a comma.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_69de5e61a1459",
+                                "operator": "==",
+                                "value": "default"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
                     "default_value": "AES On Campus \/ FY Visit,AES On Campus \/ Open House,AES On Campus \/ TR Visit,AES On Campus \/ UG Visit,AES On Campus \/ UIC Preview,Non AES On Campus \/ Financial Aid (Recruit),Non AES On Campus \/ Housing (Recruit)",
                     "maxlength": "",
+                    "allow_in_bindings": 1,
                     "rows": 3,
                     "placeholder": "",
                     "new_lines": ""
@@ -118,7 +153,15 @@
                     "type": "textarea",
                     "instructions": "Separate multiple entries with a comma.",
                     "required": 0,
-                    "conditional_logic": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_69de5e61a1459",
+                                "operator": "==",
+                                "value": "default"
+                            }
+                        ]
+                    ],
                     "wrapper": {
                         "width": "",
                         "class": "",
@@ -126,6 +169,94 @@
                     },
                     "default_value": "Non AES On Campus \/ AHS (Recruit),Non AES On Campus \/ CADA (Recruit),Non AES On Campus \/ CADA (Recruit_Partner),Non AES On Campus \/ CBA (Recruit),Non AES On Campus \/ CBA (Recruit_Partner),Non AES On Campus \/ CUPPA (Recruit),Non AES On Campus \/ EDU (Recruit),Non AES On Campus \/ ENGR (Recruit),Non AES On Campus \/ LAS (Recruit),Non AES On Campus \/ LAS (Recruit_Partner),Non AES On Campus \/ NURS (Recruit),Non AES On Campus \/ PHARM (Recruit),Non AES On Campus \/ SPH (Recruit),Non AES On Campus \/ HC\/GPPA (Recruit)",
                     "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "rows": 2,
+                    "placeholder": "",
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_69de5ed3a145a",
+                    "label": "Column 1 Event Category List",
+                    "name": "col_1_events_category_list",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Separate multiple entries with a comma.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_69de5e61a1459",
+                                "operator": "==",
+                                "value": "arbitrary"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "rows": 2,
+                    "placeholder": "",
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_69de5ef1a145b",
+                    "label": "Column 2 Event Category List",
+                    "name": "col_2_events_category_list",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Separate multiple entries with a comma.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_69de5e61a1459",
+                                "operator": "==",
+                                "value": "arbitrary"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "rows": 2,
+                    "placeholder": "",
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_69de5efea145c",
+                    "label": "Column 3 Event Category List",
+                    "name": "col_3_events_category_list",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "Separate multiple entries with a comma.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_69de5e61a1459",
+                                "operator": "==",
+                                "value": "arbitrary"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
                     "rows": 2,
                     "placeholder": "",
                     "new_lines": ""
@@ -449,5 +580,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1695069634
+    "display_title": "",
+    "modified": 1776181349
 }

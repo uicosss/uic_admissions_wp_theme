@@ -2,6 +2,15 @@
 
 require_once ( __DIR__ . '/../components/calendar.php');
 
+$events_config = get_field('events_config', 'option');
+
+if (!empty($events_config) && !empty($events_config['events_mode'])) {
+    $events_mode = $events_config['events_mode'];
+}
+else {
+    $events_mode = 'default';
+}
+
 $section_label = get_field('section_label');
 $header_text = get_field('header_text');
 
@@ -11,17 +20,41 @@ $virtual_prompt = get_field('virtual_prompt');
 $virtual_link = get_field('virtual_link');
 $academic_prompt = get_field('academic_prompt');
 $academic_link = get_field('academic_link');
+
 $upcoming_prompt = get_field('upcoming_prompt');
 $upcoming_link = get_field('upcoming_link');
+
+$in_person_no_results_text = get_field('in-person_no_results_text');
+$virtual_no_results_text = get_field('virtual_no_results_text');
+$academic_no_results_text = get_field('academic_no_results_text');
+
+/*
+Example no results markup for each panel if there are no events to show:
+<div class="uic-events__event__location">
+    In-Person
+</div>
+<div class="uic-events__event__kind">
+    Information Session
+</div>
+<div class="uic-events__event__details">
+    <div class="uic-events__event__name">
+        No upcoming academic events
+    </div>
+</div>
+*/
 
 $events = get_upcoming_events();
 $events_filtered = [];
 
 $panel_limit = 10;
-$next_virtual = [];
-$next_in_person = [];
-$next_academic = [];
+$next_virtual = [];  // column 2 in arbitrary mode
+$next_in_person = [];  // column 1 in arbitrary mode
+$next_academic = [];  // column 3 in arbitrary mode
 $person_value = null;
+
+$next_column_1 = [];
+$next_column_2 = [];
+$next_column_3 = [];
 
 if (!empty($_GET) && !empty($_GET["person"])) {
 	$person_value = $_GET["person"];
@@ -44,7 +77,7 @@ foreach ($linksArray as $key=>$linkArray) {
 	}
 }
 
-if ($events !== null && is_array($events)) {
+if ($events !== null) {
     foreach ($events as $event) {
 
 		if (time() > $event['timestamp_start']) {
@@ -63,18 +96,40 @@ if ($events !== null && is_array($events)) {
 
 		// If we are here, then the event is a valid $event_filtered item
 		array_push($events_filtered, $event);
-
-		if (count($next_virtual) == $panel_limit && count($next_in_person) == $panel_limit && count($next_academic) == $panel_limit) {
-			continue;
-		}
-		if (count($next_virtual) < $panel_limit && $event['is_virtual'] === true) {
-			$next_virtual[] = $event;
-		} elseif (count($next_in_person) < $panel_limit && $event['is_inperson_enrollment_management'] === true && $event['is_virtual'] === false) {
-			$next_in_person[] = $event;
-		} elseif (count($next_academic) < $panel_limit && ($event['is_inperson_academic'] === true || $event['is_virtual_academic'] === true)) {
-			$next_academic[] = $event;
-		}
+        if ($events_mode === 'arbitrary') {
+            if (count($next_column_1) == $panel_limit && count($next_column_2) == $panel_limit && count($next_column_3) == $panel_limit) {
+                continue;
+            }
+            // in arbitrary mode, event placement is determined by whether the event category is in the respective column category lists (which can have overlapping categories)
+            if (count($next_column_1) < $panel_limit && $event['is_col_1']) {
+                $next_column_1[] = $event;
+            }
+            if (count($next_column_2) < $panel_limit && $event['is_col_2']) {
+                $next_column_2[] = $event;
+            }
+            if (count($next_column_3) < $panel_limit && $event['is_col_3']) {
+                $next_column_3[] = $event;
+            }
+        }
+        else {
+            if (count($next_virtual) == $panel_limit && count($next_in_person) == $panel_limit && count($next_academic) == $panel_limit) {
+                continue;
+            }
+            if (count($next_virtual) < $panel_limit && $event['is_virtual'] === true) {
+                $next_virtual[] = $event;
+            } elseif (count($next_in_person) < $panel_limit && $event['is_inperson_enrollment_management'] === true && $event['is_virtual'] === false) {
+                $next_in_person[] = $event;
+            } elseif (count($next_academic) < $panel_limit && ($event['is_inperson_academic'] === true || $event['is_virtual_academic'] === true)) {
+                $next_academic[] = $event;
+            }
+        }
 	}
+}
+
+if ($events_mode === 'arbitrary') {
+    $next_in_person = $next_column_1;
+    $next_virtual = $next_column_2;
+    $next_academic = $next_column_3;
 }
 
 ?>
@@ -106,18 +161,7 @@ if ($events !== null && is_array($events)) {
                     <div class="uic-events__box-container">
                         <div class="uic-events__box uic-events__event uic-events__slider" data-max-page-size="1">
                             <?php if (empty($next_in_person)) { ?>
-                                <div class="uic-events__event__location">
-                                    In-Person
-                                </div>
-                                <div class="uic-events__event__kind">
-                                    Information Session<br />
-                                    And Campus Tour
-                                </div>
-                                <div class="uic-events__event__details">
-                                    <div class="uic-events__event__name">
-                                        No upcoming in-person events
-                                    </div>
-                                </div>
+                                <?php echo $in_person_no_results_text; ?>
                             <?php } else { ?>
                                 <div class="uic-events__panel__container">
                                     <div class="uic-events__panel__controls">
@@ -176,17 +220,7 @@ if ($events !== null && is_array($events)) {
                     <div class="uic-events__box-container">
                         <div class="uic-events__box uic-events__event uic-events__slider" data-max-page-size="1">
                             <?php if (empty($next_virtual)) { ?>
-                                <div class="uic-events__event__location">
-                                    Virtual
-                                </div>
-                                <div class="uic-events__event__kind">
-                                    Information Session
-                                </div>
-                                <div class="uic-events__event__details">
-                                    <div class="uic-events__event__name">
-                                        No upcoming virtual events
-                                    </div>
-                                </div>
+                                <?php echo $virtual_no_results_text; ?>
                             <?php } else { ?>
                                 <div class="uic-events__panel__container">
                                     <div class="uic-events__panel__controls">
@@ -240,17 +274,7 @@ if ($events !== null && is_array($events)) {
                     <div class="uic-events__box-container">
                         <div class="uic-events__box uic-events__event uic-events__slider" data-max-page-size="1">
                             <?php if (empty($next_academic)) { ?>
-                                <div class="uic-events__event__location">
-                                    In-Person
-                                </div>
-                                <div class="uic-events__event__kind">
-                                    Information Session
-                                </div>
-                                <div class="uic-events__event__details">
-                                    <div class="uic-events__event__name">
-                                        No upcoming academic events
-                                    </div>
-                                </div>
+                                <?php echo $academic_no_results_text; ?>
                             <?php } else { ?>
                                 <div class="uic-events__panel__container">
                                     <div class="uic-events__panel__controls">
@@ -317,48 +341,46 @@ if ($events !== null && is_array($events)) {
                         </div>
                     </div>
                 </div>
-                <?php
-                echo '<div class="uic-events__grid-item uic-events__grid-item--link uic-events__grid-item--link-0">';
-                    if (!empty($in_person_link)) {
+                <div class="uic-events__grid-item uic-events__grid-item--link uic-events__grid-item--link-0">
+                    <?php if (!empty($in_person_link)) {
                         echo '<a href="' . esc_url($linksArray[0]['url']) . '"';
                         echo ' title="' . esc_attr($in_person_link['title']) . '"';
                         if (!empty($in_person_link['target'])) {
                             echo ' target="' . esc_attr($in_person_link['target']) . '"';
                         }
                         echo '>' . $in_person_link['title'] . '</a>';
-                    }
-                echo '</div>';
-                echo '<div class="uic-events__grid-item uic-events__grid-item--link uic-events__grid-item--link-1">';
-                    if (!empty($virtual_link)) {
+                    } ?>
+                </div>
+                <div class="uic-events__grid-item uic-events__grid-item--link uic-events__grid-item--link-1">
+                    <?php if (!empty($virtual_link)) {
                         echo '<a href="' . esc_url($linksArray[1]['url']) . '"';
                         echo ' title="' . esc_attr($virtual_link['title']) . '"';
                         if (!empty($virtual_link['target'])) {
                             echo ' target="' . esc_attr($virtual_link['target']) . '"';
                         }
                         echo '>' . $virtual_link['title'] . '</a>';
-                    }
-                echo '</div>';
-                echo '<div class="uic-events__grid-item uic-events__grid-item--link uic-events__grid-item--link-2">';
-                    if (!empty($academic_link)) {
+                    } ?>
+                </div>
+                <div class="uic-events__grid-item uic-events__grid-item--link uic-events__grid-item--link-2">
+                     <?php if (!empty($academic_link)) {
 						echo '<a href="' . esc_url($linksArray[2]['url']) . '"';
                         echo ' title="' . esc_attr($academic_link['title']) . '"';
                         if (!empty($academic_link['target'])) {
                             echo ' target="' . esc_attr($academic_link['target']) . '"';
                         }
                         echo '>' . $academic_link['title'] . '</a>';
-                    }
-                echo '</div>';
-                echo '<div class="uic-events__grid-item uic-events__grid-item--link uic-events__grid-item--link-3">';
-                    if (!empty($upcoming_link)) {
+                    } ?>
+                </div>
+                <div class="uic-events__grid-item uic-events__grid-item--link uic-events__grid-item--link-3">
+                     <?php if (!empty($upcoming_link)) {
                         echo '<a href="' . esc_url($linksArray[3]['url']) . '"';
                         echo ' title="' . esc_attr($upcoming_link['title']) . '"';
                         if (!empty($upcoming_link['target'])) {
                             echo ' target="' . esc_attr($upcoming_link['target']) . '"';
                         }
                         echo '>' . $upcoming_link['title'] . '</a>';
-                    }
-                echo '</div>';
-                ?>
+                    } ?>
+                </div>
             </div>
         </div>
     </div>

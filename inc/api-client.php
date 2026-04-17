@@ -2,7 +2,7 @@
 
 function get_remote_tuition_data()
 {
-    $cache_key = 'uic_tuition_cache-new';
+    $cache_key = 'UIC_CALCULATOR_DATA';
     $data = get_transient($cache_key);
 
     if (false === $data) {

@@ -2,7 +2,7 @@
 
 function render_calendar($events) {
     $current_date_str = null;
-    foreach($events as $event) {
+    foreach ($events as $event) {
         if ($event['date_start_utc'] !== $current_date_str) {
             if ($current_date_str !== null) {
                 echo _tag_close('div');
@@ -49,7 +49,9 @@ function render_calendar($events) {
             ])
         ]);
     }
-    echo _tag_close('div');
-    echo _tag_close('div');
-    echo _tag_close('div');
+    if ($current_date_str !== null) {
+        echo _tag_close('div');
+        echo _tag_close('div');
+        echo _tag_close('div');
+    }
 }

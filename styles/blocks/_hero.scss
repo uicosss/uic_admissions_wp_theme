@@ -249,6 +249,25 @@
         --uic-hero__text--connect--o-offset-x: 177.05;
         --uic-hero__text--connect--o-offset-y: 73.1513;
         --uic-hero__text--connect--aspect-ratio: calc(var( --uic-hero__text--connect--width) / var(--uic-hero__text--connect--height));
+        
+        // UIC Bound Additions
+        --uic-hero__text--welcome--width: 763.6;
+        --uic-hero__text--welcome--height: 146.4;
+        --uic-hero__text--welcome--o-offset-x: 475.25;
+        --uic-hero__text--welcome--o-offset-y: 73.1513;
+        --uic-hero__text--welcome--aspect-ratio: calc(var(--uic-hero__text--welcome--width) / var(--uic-hero__text--welcome--height));
+        
+        --uic-hero__text--belong--width: 630.2;
+        --uic-hero__text--belong--height: 146.4;
+        --uic-hero__text--belong--o-offset-x: 336.45;
+        --uic-hero__text--belong--o-offset-y: 73.1513;
+        --uic-hero__text--belong--aspect-ratio: calc(var(--uic-hero__text--belong--width) / var(--uic-hero__text--belong--height));
+        
+        --uic-hero__text--enroll--width: 610;
+        --uic-hero__text--enroll--height: 146.4;
+        --uic-hero__text--enroll--o-offset-x: 380.435;
+        --uic-hero__text--enroll--o-offset-y: 73.1513;
+        --uic-hero__text--enroll--aspect-ratio: calc(var(--uic-hero__text--enroll--width) / var(--uic-hero__text--enroll--height));
 
         &--discover {
             --uic-hero__text--width: var(--uic-hero__text--discover--width);
@@ -279,6 +298,30 @@
             --uic-hero__text--o-offset-y: var(--uic-hero__text--connect--o-offset-y);
         }
 
+        // UIC Bound Additions
+        &--welcome {
+            --uic-hero__text--width: var(--uic-hero__text--welcome--width);
+            --uic-hero__text--height: var(--uic-hero__text--welcome--height);
+            --uic-hero__text--aspect-ratio: var(--uic-hero__text--welcome--aspect-ratio);
+            --uic-hero__text--o-offset-x: var(--uic-hero__text--welcome--o-offset-x);
+            --uic-hero__text--o-offset-y: var(--uic-hero__text--welcome--o-offset-y);
+        }
+        &--belong {
+            --uic-hero__text--width: var(--uic-hero__text--belong--width);
+            --uic-hero__text--height: var(--uic-hero__text--belong--height);
+            --uic-hero__text--aspect-ratio: var(--uic-hero__text--belong--aspect-ratio);
+            --uic-hero__text--o-offset-x: var(--uic-hero__text--belong--o-offset-x);
+            --uic-hero__text--o-offset-y: var(--uic-hero__text--belong--o-offset-y);
+        }
+        &--enroll {
+            --uic-hero__text--width: var(--uic-hero__text--enroll--width);
+            --uic-hero__text--height: var(--uic-hero__text--enroll--height);
+            --uic-hero__text--aspect-ratio: var(--uic-hero__text--enroll--aspect-ratio);
+            --uic-hero__text--o-offset-x: var(--uic-hero__text--enroll--o-offset-x);
+            --uic-hero__text--o-offset-y: var(--uic-hero__text--enroll--o-offset-y);
+        }
+
+
         // center the hero text around the "O" based on it's offsets
         --uic-hero__text--center-x: calc(var(--uic-hero__text--width) / 2);
         --uic-hero__text--delta-x: calc(var(--uic-hero__text--o-offset-x) / var(--uic-hero__text--width));
@@ -305,7 +348,10 @@
                 var(--uic-hero__text--discover--aspect-ratio),
                 var(--uic-hero__text--become--aspect-ratio),
                 var(--uic-hero__text--explore--aspect-ratio),
-                var(--uic-hero__text--connect--aspect-ratio)
+                var(--uic-hero__text--connect--aspect-ratio),
+                var(--uic-hero__text--welcome--aspect-ratio),
+                var(--uic-hero__text--belong--aspect-ratio),
+                var(--uic-hero__text--enroll--aspect-ratio)
             )
         );
         width: calc(67.5% * var(--uic-hero__text--scale));

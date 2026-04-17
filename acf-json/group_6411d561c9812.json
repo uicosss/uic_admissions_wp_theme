@@ -46,7 +46,9 @@
             "allow_null": 0,
             "ui": 0,
             "ajax": 0,
-            "placeholder": ""
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_6411e621f0d52",
@@ -88,15 +90,21 @@
                         "explore": "Explore",
                         "discover": "Discover",
                         "connect": "Connect",
-                        "become": "Become"
+                        "become": "Become",
+                        "welcome": "Welcome",
+                        "belong": "Belong",
+                        "enroll": "Enroll"
                     },
                     "default_value": false,
                     "return_format": "value",
                     "multiple": 0,
                     "allow_null": 0,
+                    "allow_in_bindings": 1,
                     "ui": 0,
                     "ajax": 0,
                     "placeholder": "",
+                    "create_options": 0,
+                    "save_options": 0,
                     "parent_repeater": "field_6411e621f0d52"
                 },
                 {
@@ -146,5 +154,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1680276135
+    "display_title": "",
+    "modified": 1775751098
 }

@@ -1,29 +1,10 @@
-*.log
+# Dependencies
+node_modules/
+vendor/
 
+# Build outputs
+dist/
 
-
-/.htaccess
-/license.txt
-/readme.html
-/sitemap.xml
-/sitemap.xml.gz
-
-*.pyc
-*.iml
-.sass-cache/
-*.scssc
-node_modules
-/log/
-
-# Vagrant
-.vagrant
-
+# WordPress/System files
 .DS_Store
-
-.lando.local.yml
-
-_backports
-
-*.wpress
-.idea/*
-*.sql
+thumbs.db

@@ -214,86 +214,88 @@ onReady(() => {
         const itemCount = slider.querySelectorAll('.uic-events__panel__item').length;
         let maxPageSize = 1;
 
-        const prevArrow = slider.querySelector('.uic-events__panel__prev')
-        checkSelector(prevArrow, 'prevArrow');
-        const nextArrow = slider.querySelector('.uic-events__panel__next')
-        checkSelector(nextArrow, 'nextArrow');
+        if (itemCount > 0) {
+            const prevArrow = slider.querySelector('.uic-events__panel__prev')
+            checkSelector(prevArrow, 'prevArrow');
+            const nextArrow = slider.querySelector('.uic-events__panel__next')
+            checkSelector(nextArrow, 'nextArrow');
 
-        const glidePanel = new Glide(slider, {
-            type: 'slider',
-            startAt: 0,
-            perView: maxPageSize,
-            gap: maxPageSize === 3 ? 64 : 24,
-            animationDuration: 600,
-            animationTimingFunc: 'ease-in-out',
-            keyboard: false,
-        });
+            const glidePanel = new Glide(slider, {
+                type: 'slider',
+                startAt: 0,
+                perView: maxPageSize,
+                gap: maxPageSize === 3 ? 64 : 24,
+                animationDuration: 600,
+                animationTimingFunc: 'ease-in-out',
+                keyboard: false,
+            });
 
-        slider.setAttribute('data-active-slide', String(0));
-        const state = {
-            pageSize: maxPageSize,
-            pageCount: Math.ceil(itemCount / maxPageSize),
-            activePage: 0
-        };
-        let prevArrowShowing = false;
-        let nextArrowShowing = true;
-        prevArrow.addEventListener('click', e => {
-            e.preventDefault();
-            e.stopPropagation();
-            if (state.activePage > 0) {
-                glidePanel.go(`=${(state.activePage-1)*state.pageSize}`);
-            } else if (state.activePage === 0) {
-                glidePanel.go(`=0`);
-            }
-        });
-        nextArrow.addEventListener('click', e => {
-            e.preventDefault();
-            e.stopPropagation();
-            if (state.activePage < (state.pageCount - 1)) {
-                glidePanel.go(`=${(state.activePage+1)*state.pageSize}`);
-            }
-        });
+            slider.setAttribute('data-active-slide', String(0));
+            const state = {
+                pageSize: maxPageSize,
+                pageCount: Math.ceil(itemCount / maxPageSize),
+                activePage: 0
+            };
+            let prevArrowShowing = false;
+            let nextArrowShowing = true;
+            prevArrow.addEventListener('click', e => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (state.activePage > 0) {
+                    glidePanel.go(`=${(state.activePage-1)*state.pageSize}`);
+                } else if (state.activePage === 0) {
+                    glidePanel.go(`=0`);
+                }
+            });
+            nextArrow.addEventListener('click', e => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (state.activePage < (state.pageCount - 1)) {
+                    glidePanel.go(`=${(state.activePage+1)*state.pageSize}`);
+                }
+            });
 
-        glidePanel.on(['run.after', 'resize', 'mount.after'], () => {
-            state.pageSize = glidePanel.settings.perView;
-            slider.setAttribute('data-slide-count', String(itemCount));
-            slider.setAttribute('data-page-size', String(state.pageSize));
-            slider.setAttribute('data-active-slide', String(glidePanel.index));
-            state.pageCount =  Math.ceil(itemCount / state.pageSize);
-            state.activePage =  (glidePanel.index - (glidePanel.index % state.pageSize)) / state.pageSize;
-            slider.setAttribute('data-page-count', String(state.pageCount));
-            slider.setAttribute('data-active-page', String(state.activePage));
+            glidePanel.on(['run.after', 'resize', 'mount.after'], () => {
+                state.pageSize = glidePanel.settings.perView;
+                slider.setAttribute('data-slide-count', String(itemCount));
+                slider.setAttribute('data-page-size', String(state.pageSize));
+                slider.setAttribute('data-active-slide', String(glidePanel.index));
+                state.pageCount =  Math.ceil(itemCount / state.pageSize);
+                state.activePage =  (glidePanel.index - (glidePanel.index % state.pageSize)) / state.pageSize;
+                slider.setAttribute('data-page-count', String(state.pageCount));
+                slider.setAttribute('data-active-page', String(state.activePage));
 
-            const hasAtStart = slider.hasAttribute('data-at-start');
-            const hasAtEnd = slider.hasAttribute('data-at-end');
-            if (hasAtStart && glidePanel.index !== 0) {
-                slider.removeAttribute('data-at-start')
-            } else if (glidePanel.index === 0 && !hasAtStart) {
-                slider.setAttribute('data-at-start', 'true');
-            }
+                const hasAtStart = slider.hasAttribute('data-at-start');
+                const hasAtEnd = slider.hasAttribute('data-at-end');
+                if (hasAtStart && glidePanel.index !== 0) {
+                    slider.removeAttribute('data-at-start')
+                } else if (glidePanel.index === 0 && !hasAtStart) {
+                    slider.setAttribute('data-at-start', 'true');
+                }
 
-            if (hasAtEnd && glidePanel.index < (itemCount - state.pageSize)) {
-                slider.removeAttribute('data-at-end')
-            } else if (glidePanel.index >= (itemCount - state.pageSize) && !hasAtEnd) {
-                slider.setAttribute('data-at-end', 'true');
-            }
+                if (hasAtEnd && glidePanel.index < (itemCount - state.pageSize)) {
+                    slider.removeAttribute('data-at-end')
+                } else if (glidePanel.index >= (itemCount - state.pageSize) && !hasAtEnd) {
+                    slider.setAttribute('data-at-end', 'true');
+                }
 
-            if (!prevArrowShowing && glidePanel.index > 0) {
-                prevArrowShowing = true;
-                prevArrow.classList.remove('arrow_hidden');
-            } else if (prevArrowShowing && glidePanel.index == 0) {
-                prevArrowShowing = false;
-                prevArrow.classList.add('arrow_hidden');
-            }
-            if (nextArrowShowing && glidePanel.index == (itemCount - 1)) {
-                nextArrowShowing = false;
-                nextArrow.classList.add('arrow_hidden');
-            } else if (!nextArrowShowing && glidePanel.index < (itemCount - 1)) {
-                nextArrowShowing = true;
-                nextArrow.classList.remove('arrow_hidden');
-            }
-        });
-        glidePanel.mount();
+                if (!prevArrowShowing && glidePanel.index > 0) {
+                    prevArrowShowing = true;
+                    prevArrow.classList.remove('arrow_hidden');
+                } else if (prevArrowShowing && glidePanel.index == 0) {
+                    prevArrowShowing = false;
+                    prevArrow.classList.add('arrow_hidden');
+                }
+                if (nextArrowShowing && glidePanel.index == (itemCount - 1)) {
+                    nextArrowShowing = false;
+                    nextArrow.classList.add('arrow_hidden');
+                } else if (!nextArrowShowing && glidePanel.index < (itemCount - 1)) {
+                    nextArrowShowing = true;
+                    nextArrow.classList.remove('arrow_hidden');
+                }
+            });
+            glidePanel.mount();
+        }
     }
 })
 

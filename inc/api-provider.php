@@ -14,9 +14,9 @@ add_action('rest_api_init', function () {
 
 function get_tuition_data()
 {
-    /* 
-        This data resides within the 
-        ACF theme options page: calulator-config 
+    /*
+        This data resides within the
+        ACF theme options page: calulator-config
         (Theme Config -> Calculator Config)
     */
     $differentials = [];
@@ -27,7 +27,8 @@ function get_tuition_data()
         foreach ($department['programs'] as $program) {
             array_push($programs, [
                 'name' => $program['name'],
-                'cost' => (float)$program['cost']
+                'cost' => (float)$program['cost'],
+                'slug' => $program['slug'],
             ]);
         }
         array_push($differentials, [

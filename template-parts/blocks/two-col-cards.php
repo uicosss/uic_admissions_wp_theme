@@ -5,17 +5,12 @@
  * Fields:
  * - section_label (text)
  * - heading (text)
- * - cards (repeater of 2):
- *   - image (image array)
- *   - title (text)
- *   - text (textarea)
- *   - link (link array)
+ * - cards (repeater of max 2):
+ * - image (image array)
+ * - title (text)
+ * - text (textarea)
+ * - link (link array)
  */
-
-if (defined('WP_DEBUG') && WP_DEBUG) {
-  // Shows up in View Source so you can confirm the template ran
-  echo "\n<!-- two-col-cards render.php called -->\n";
-}
 
 $block_id = !empty($block['anchor'])
   ? $block['anchor']
@@ -23,58 +18,71 @@ $block_id = !empty($block['anchor'])
 
 $classes = 'two-col-cards';
 if (!empty($block['className'])) $classes .= ' ' . $block['className'];
-if (!empty($block['align']))     $classes .= ' align' . $block['align'];
+if (!empty($block['align'])) $classes .= ' align' . $block['align'];
 
 $section_label = get_field('section_label') ?: '';
 $heading       = get_field('heading') ?: '';
 $cards         = get_field('cards') ?: [];
 
-// Hard cap at 2 (defensive)
 $cards = array_slice($cards, 0, 2);
+
+$card_1 = $cards[0] ?? null;
+$card_2 = $cards[1] ?? null;
+
+// Card 1 fields
+$img_1    = $card_1['image'] ?? null;
+$title_1  = $card_1['title'] ?? '';
+$text_1   = $card_1['text'] ?? '';
+$link_1   = $card_1['link'] ?? null;
+$url_1    = is_array($link_1) && !empty($link_1['url']) ? $link_1['url'] : '';
+$label_1  = is_array($link_1) && !empty($link_1['title']) ? $link_1['title'] : '';
+$target_1 = is_array($link_1) && !empty($link_1['target']) ? $link_1['target'] : '';
+if ($url_1 && !$label_1) $label_1 = 'Learn more';
+
+// Card 2 fields
+$img_2    = $card_2['image'] ?? null;
+$title_2  = $card_2['title'] ?? '';
+$text_2   = $card_2['text'] ?? '';
+$link_2   = $card_2['link'] ?? null;
+$url_2    = is_array($link_2) && !empty($link_2['url']) ? $link_2['url'] : '';
+$label_2  = is_array($link_2) && !empty($link_2['title']) ? $link_2['title'] : '';
+$target_2 = is_array($link_2) && !empty($link_2['target']) ? $link_2['target'] : '';
+if ($url_2 && !$label_2) $label_2 = 'Learn more';
 ?>
 
 <section id="<?php echo esc_attr($block_id); ?>" class="<?php echo esc_attr($classes); ?> uic-section__container">
   <div class="uic-section__inner two-col-cards__inner">
+
     <?php if ($section_label) : ?>
-    <div class="uic-section__label">
-    <h2 class="uic-h2"><?php echo esc_html($section_label); ?></h2>
-    </div>
+      <div class="uic-section__label">
+        <h2 class="uic-h2" id="<?= sanitize_title($section_label) ?>"><?php echo esc_html($section_label); ?></h2>
+      </div>
     <?php endif; ?>
 
     <?php if ($heading) : ?>
-    <h3 class="two-col-cards__title uic-h3">
+      <h3 class="two-col-cards__title uic-h3">
         <?php echo esc_html($heading); ?>
-    </h3>
+      </h3>
     <?php endif; ?>
 
-    <?php if (!empty($cards)) : ?>
+    <?php if ($card_1 || $card_2) : ?>
       <div class="two-col-cards__grid" role="list">
-        <?php foreach ($cards as $card) :
-          $img   = $card['image'] ?? null;
-          $t     = $card['title'] ?? '';
-          $txt   = $card['text'] ?? '';
-          $link  = $card['link'] ?? null;
 
-          $url    = is_array($link) && !empty($link['url']) ? $link['url'] : '';
-          $label  = is_array($link) && !empty($link['title']) ? $link['title'] : '';
-          $target = is_array($link) && !empty($link['target']) ? $link['target'] : '';
-
-          if ($url && !$label) $label = 'Learn more';
-        ?>
+        <?php if ($card_1) : ?>
           <article class="two-col-cards__card" role="listitem">
             <div class="two-col-cards__media">
-              <?php if (!empty($img['ID'])) : ?>
+              <?php if (!empty($img_1['ID'])) : ?>
                 <?php
-                  echo wp_get_attachment_image(
-                    $img['ID'],
-                    'large',
-                    false,
-                    [
-                      'class' => 'two-col-cards__img',
-                      'loading' => 'lazy',
-                      'decoding' => 'async'
-                    ]
-                  );
+                echo wp_get_attachment_image(
+                  $img_1['ID'],
+                  'large',
+                  false,
+                  [
+                    'class' => 'two-col-cards__img',
+                    'loading' => 'lazy',
+                    'decoding' => 'async',
+                  ]
+                );
                 ?>
               <?php else : ?>
                 <div class="two-col-cards__img two-col-cards__img--placeholder" aria-hidden="true"></div>
@@ -82,27 +90,80 @@ $cards = array_slice($cards, 0, 2);
             </div>
 
             <div class="two-col-cards__content">
-              <?php if ($t) : ?>
-                <h3 class="two-col-cards__card-title"><?php echo esc_html($t); ?></h3>
+              <?php if ($title_1) : ?>
+                <h3 class="two-col-cards__card-title"><?php echo esc_html($title_1); ?></h3>
               <?php endif; ?>
 
-              <?php if ($txt) : ?>
+              <?php if ($text_1) : ?>
                 <div class="two-col-cards__text">
-                  <?php echo wp_kses_post(wpautop($txt)); ?>
+                  <?php echo wp_kses_post(wpautop($text_1)); ?>
                 </div>
-              <?php endif; ?>
-
-              <?php if ($url) : ?>
-                <a class="two-col-cards__link"
-                   href="<?php echo esc_url($url); ?>"
-                   <?php echo $target ? 'target="' . esc_attr($target) . '" rel="noopener noreferrer"' : ''; ?>>
-                  <?php echo esc_html($label); ?>
-                </a>
               <?php endif; ?>
             </div>
           </article>
-        <?php endforeach; ?>
+        <?php endif; ?>
+
+        <?php if ($card_2) : ?>
+          <article class="two-col-cards__card" role="listitem">
+            <div class="two-col-cards__media">
+              <?php if (!empty($img_2['ID'])) : ?>
+                <?php
+                echo wp_get_attachment_image(
+                  $img_2['ID'],
+                  'large',
+                  false,
+                  [
+                    'class' => 'two-col-cards__img',
+                    'loading' => 'lazy',
+                    'decoding' => 'async',
+                  ]
+                );
+                ?>
+              <?php else : ?>
+                <div class="two-col-cards__img two-col-cards__img--placeholder" aria-hidden="true"></div>
+              <?php endif; ?>
+            </div>
+
+            <div class="two-col-cards__content">
+              <?php if ($title_2) : ?>
+                <h3 class="two-col-cards__card-title"><?php echo esc_html($title_2); ?></h3>
+              <?php endif; ?>
+
+              <?php if ($text_2) : ?>
+                <div class="two-col-cards__text">
+                  <?php echo wp_kses_post(wpautop($text_2)); ?>
+                </div>
+              <?php endif; ?>
+            </div>
+          </article>
+        <?php endif; ?>
+
       </div>
     <?php endif; ?>
+
+    <?php if ($url_1 || $url_2) : ?>
+      <div class="two-col-cards__actions">
+        <?php if ($url_1) : ?>
+          <a
+            class="two-col-cards__link"
+            href="<?php echo esc_url($url_1); ?>"
+            <?php echo $target_1 ? 'target="' . esc_attr($target_1) . '" rel="noopener noreferrer"' : ''; ?>
+          >
+            <?php echo esc_html($label_1); ?>
+          </a>
+        <?php endif; ?>
+
+        <?php if ($url_2) : ?>
+          <a
+            class="two-col-cards__link"
+            href="<?php echo esc_url($url_2); ?>"
+            <?php echo $target_2 ? 'target="' . esc_attr($target_2) . '" rel="noopener noreferrer"' : ''; ?>
+          >
+            <?php echo esc_html($label_2); ?>
+          </a>
+        <?php endif; ?>
+      </div>
+    <?php endif; ?>
+
   </div>
 </section>

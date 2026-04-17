@@ -207,7 +207,7 @@
         font-size: 1.119rem;
         line-height: 1.5rem;
 
-        span {
+        strong {
             font-weight: 600;
             color: $palette-yellow400;
         }
@@ -674,7 +674,7 @@
         background-position: -80px 50%;
 
         &__line-item {
-            &__tuition, &__differential, &__attendance, &__books, &__housing-variable, &__personal, &__transportation, &__total, &__choices, &__variable, &__fees {
+            &__tuition, &__differential, &__housing-estimate, &__attendance, &__books, &__housing-variable, &__personal, &__transportation, &__total, &__choices, &__variable, &__fees {
                 &-label, &-value, &-symbol, &-desc {
                     // font-size: 1.5rem; // 24px; // 18pt;
                     // line-height: 1.813rem; // 29px; // 21.9pt;

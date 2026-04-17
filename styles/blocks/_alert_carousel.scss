@@ -1,79 +1,100 @@
+// =====================
+// Component Styles
+// =====================
 .alert-carousel {
 	position: relative;
-	background: #efb53a;
+	background: $palette-yellow400;
 	overflow: hidden;
 
 	&__item {
 		position: relative;
-        padding-bottom: 34px;
-		margin: 80px 80px 48px 80px;
-		background: #efb53a;
-        display: flex;
-    	flex-direction: column;
-        gap: 34px;
+		padding-bottom: 34px;
+		margin: 0 auto;
+		margin-top: 80px;
+		margin-bottom: 48px;
+		background: $palette-yellow400;
+		display: flex;
+		flex-direction: column;
+		gap: 34px;
+		max-width: 860px;
 	}
 
 	&__content {
 		max-width: 940px;
+		display: flex;
+		flex-direction: column;
+		padding-left: 22px;
+		gap: 19px;
 	}
 
 	&__eyebrow {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		gap: 16px;
+
 		padding: 14px 34px;
-		background: #002b7f;
-		color: #fff;
-		font-size: 1.5rem;
-		font-weight: 700;
-		line-height: 1.15;
+		background: $palette-blue900;
+	}
+
+	&__eyebrow-prefix {
+		color: $palette-white;
+		font-family: Jost;
+		font-size: 36px;
+		font-style: normal;
+		font-weight: 900;
+		line-height: 44px;
+		text-transform: uppercase;
+	}
+
+	&__eyebrow-text {
+		color: $palette-white;
+		font-family: Jost;
+		font-size: 36px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 56px;
 	}
 
 	&__header {
-		color: #001E62;
-        font-family: Jost;
-        font-size: 36px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 44px;
-        text-transform: uppercase;
+		color: $palette-blue900;
+		font-family: Jost;
+		font-size: 36px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 44px;
+		text-transform: uppercase;
 	}
 
 	&__description {
 		max-width: 760px;
-		color: #001E62;
-        font-family: Roboto;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 26px;
+		color: $palette-blue900;
+		font-family: Roboto;
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 26px;
 	}
 
-    &__text {
-        display: flex;
-    	flex-direction: column;
-        padding-left: 10px;
-        gap: 12px;
-    }
+	&__text {
+		display: flex;
+		flex-direction: column;
+		padding-left: 10px;
+		gap: 12px;
+	}
 
 	&__link {
 		display: inline-flex;
 		align-items: center;
-        padding: 10px;
+		padding: 10px;
 	}
-    
-    &__content {
-        display: flex;
-    	flex-direction: column;
-        padding-left: 22px;
-        gap: 19px;
-    }
-    
+
 	&.splide {
 		.splide__track {
 			overflow: hidden;
 		}
 
 		.splide__slide {
-			background: #efb53a;
+			background: $palette-yellow400;
 		}
 
 		.splide__arrow {
@@ -89,7 +110,7 @@
 			svg {
 				width: 30px;
 				height: 30px;
-				fill: #002b7f;
+				fill: $palette-blue900;
 			}
 
 			&--prev {
@@ -101,23 +122,23 @@
 			}
 		}
 
-        .splide__pagination {
-            position: absolute;
-            gap: 12px;
-            bottom: 48px;
-        }
+		.splide__pagination {
+			position: absolute;
+			gap: 12px;
+			bottom: 48px;
+		}
 
 		.splide__pagination__page {
 			width: 14px;
 			height: 14px;
 			margin: 0;
-			border: 2px solid #002b7f;
+			border: 2px solid $palette-blue900;
 			background: transparent;
 			opacity: 1;
 			transform: none;
 
 			&.is-active {
-				background: #002b7f;
+				background: $palette-blue900;
 				transform: none;
 			}
 		}
@@ -127,50 +148,55 @@
 		&__item {
 			min-height: auto;
 			margin: 24px;
-            gap: 16px;
+			gap: 16px;
 		}
 
 		&__content {
-            padding: 0px;
-            gap: 12px;
+			padding: 0;
+			gap: 12px;
 			max-width: none;
 		}
 
 		&__eyebrow {
-			display: block;
+			display: inline;
 			padding: 10px;
-			font-size: 0.95rem;
-			line-height: 1.2;
-            color: #FFF;
-            font-family: Jost;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 900;
-            line-height: 24px;
+		}
+
+		&__eyebrow-prefix,
+		&__eyebrow-text{
+			display: inline;
+			background: none;
+			padding: 0;
+			color: $palette-white;
+			font-family: Jost;
+			font-size: 20px;
+			font-style: normal;
+			line-height: 24px;
 		}
 
 		&__header {
-            font-family: Jost;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 24px; /* 120% */
-
+			font-family: Jost;
+			font-size: 20px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: 24px;
 		}
 
 		&__description {
-            color: #001E62;
-            font-family: Roboto;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 26px; /* 130% */
+			color: $palette-blue900;
+			font-family: Roboto;
+			font-size: 20px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 26px;
 		}
 
 		&__link {
 			font-size: 0.95rem;
 		}
-
+	}
+	
+	@media (max-width: 1000px) {
 		&.splide {
 			.splide__arrow {
 				display: none;

@@ -9,7 +9,7 @@
   &__title {
     margin: 22px 0 0;
     text-align: center;
-    color: #5b5b5b;
+    color: $palette-gray500;
   }
 
   &__grid {
@@ -52,7 +52,7 @@
   }
 
   &__text {
-    color: #7a7a7a;
+    color: $palette-gray500;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -61,39 +61,35 @@
     p { margin: 0; }
   }
 
-.two-col-cards__link {
-  display: block;
-  margin-top: 48px;
-
-  color: $palette-blue900;
-
-  font-family: "Roboto", sans-serif;
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 26px;
-
-  text-decoration: underline;
-  text-transform: uppercase;
-  text-underline-offset: 5px;
-  text-decoration-thickness: 2px;
-  transition: text-underline-offset 400ms ease-in-out,
-  text-decoration-color 400ms ease;
-  &:hover {
-    text-decoration-color: $palette-yellow400;
-    text-underline-offset: 8px;
+  &__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    margin-top: 48px;
+    flex-wrap: wrap;
   }
 
-  text-transform: uppercase;
-}
+  &__link {
+    display: block;
+    color: $palette-blue900;
+    font-family: "Roboto", sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 26px;
+    text-decoration: underline;
+    text-transform: uppercase;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 2px;
+    transition: text-underline-offset 400ms ease-in-out,
+      text-decoration-color 400ms ease;
 
-  .two-col-cards__card:nth-child(1) .two-col-cards__link {
-    text-align: right;
+    &:hover {
+      text-decoration-color: $palette-yellow400;
+      text-underline-offset: 8px;
+    }
   }
 
-  .two-col-cards__card:nth-child(2) .two-col-cards__link {
-    text-align: left;
-  }
 
   @media (max-width: 699px) {
     &__inner {
@@ -112,6 +108,10 @@
       align-items: stretch;
       padding-left: 11px;
       padding-right: 11px;
+    }
+
+    &__actions {
+      gap: 8px;
     }
   }
 }

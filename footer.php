@@ -94,15 +94,15 @@ require(__DIR__ . '/template-parts/components/back-to-top.php');
 						echo '<a href="' . esc_url($twitter_link['url']) . '" class="uic-footer__social__link"';
 						if (!empty($twitter_link['title'])) echo ' title="' . esc_attr($twitter_link['title']) . '"';
 						if (!empty($twitter_link['target'])) echo ' target="' . esc_attr($twitter_link['target']) . '"';
-						echo '><img src="' . THEME_ASSET_BASE . '/images/social-icons/twitter.svg" alt="Twitter Logo" /></a>';
+						echo '><img src="' . THEME_ASSET_BASE . '/images/social-icons/x-logo.svg" alt="X Logo" /></a>';
 					} ?>
 				</div>
-			</nav>   
+			</nav>
 		</div>
 	</div>
 </footer>
 
-<?php 
+<?php
 require(__DIR__ . '/template-parts/blocks/feedback.php');
 wp_footer();
 ?>

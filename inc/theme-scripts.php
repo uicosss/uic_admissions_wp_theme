@@ -35,3 +35,27 @@ add_action( 'wp_footer', function() {
     </script>
 <?php
 }, 100 );
+
+/**
+ * Enqueue Splide.js Library and Styles
+ */
+function my_theme_enqueue_splide() {
+    // 1. Enqueue the Splide CSS
+    wp_enqueue_style(
+        'splide-css',
+        'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css',
+        array(),
+        '4.1.4'
+    );
+
+    // 2. Enqueue the Splide JS
+    wp_enqueue_script(
+        'splide-js',
+        'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js',
+        array(),
+        '4.1.4',
+        true // Load in footer for better performance
+    );
+
+}
+add_action('wp_enqueue_scripts', 'my_theme_enqueue_splide');

@@ -81,6 +81,12 @@
         font-size: 1.063rem; // 17px;
         line-height: 1.25rem; // 20px;
         text-transform: uppercase;
+
+        // Mobile Styling
+        @media (max-width: 767px) {
+            font-size: 10px;
+            line-height: 1.1rem;
+        }
     }
 }
 
