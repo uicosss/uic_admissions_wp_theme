@@ -64,7 +64,7 @@ $uid = preg_replace('/[^a-zA-Z0-9\-_]/', '', $block_id);
     </div>
 
     <div class="tab-checklist__panels">
-      
+
       <div class="tab-checklist__panel is-active" data-tab-panel="left">
         <?php render_tab_content($left_data, $uid . '-left'); ?>
       </div>
@@ -76,70 +76,3 @@ $uid = preg_replace('/[^a-zA-Z0-9\-_]/', '', $block_id);
     </div>
   </div>
 </section>
-
-<?php
-/**
- * Render the accordion items, notes, and CTA links for a set
- */
-function render_tab_content($data, $id_prefix) {
-    $items = $data['items'];
-    $note  = $data['note'];
-    $links = $data['links'];
-
-    if (!empty($items)) : ?>
-        <div class="tab-checklist__accordion">
-            <?php foreach ($items as $i => $item) :
-                $title = $item['title'] ?? '';
-                $inner = $item['inner_text'] ?? '';
-                $f_note = $item['footer_note'] ?? '';
-                $f_text = $item['footer_text'] ?? '';
-                $cid   = $id_prefix . '-' . $i;
-                if (!$title && !$inner) continue;
-            ?>
-                <div class="tab-checklist__item">
-                    <button type="button" class="tab-checklist__itembtn" aria-expanded="false" aria-controls="<?= $cid ?>">
-                        <span class="tab-checklist__itemtitle"><?= esc_html($title) ?></span>
-                        <span class="tab-checklist__chev" aria-hidden="true"></span>
-                    </button>
-                    <div id="<?= $cid ?>" class="tab-checklist__itemcontent" hidden>
-                        <?php if ($inner) : ?>
-                            <div class="tab-checklist__itemtext"><?= wp_kses_post($inner) ?></div>
-                        <?php endif; ?>
-                        
-                        <?php if ($f_note || $f_text) : ?>
-                            <hr class="tab-checklist__divider" aria-hidden="true" />
-                            <?php if ($f_note) : ?>
-                                <div class="tab-checklist__footer-note"><?= wp_kses_post(wpautop($f_note)) ?></div>
-                            <?php endif; ?>
-                            <?php if ($f_text) : ?>
-                                <div class="tab-checklist__footer-text"><?= wp_kses_post(wpautop($f_text)) ?></div>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif;
-
-    if ($note) : ?>
-        <div class="tab-checklist__note">
-            <?= wp_kses_post(wpautop($note)) ?>
-        </div>
-    <?php endif;
-
-    if (!empty($links)) : ?>
-        <div class="uic-cta-footer__container">
-            <?php foreach ($links as $row) :
-                $link = $row['link'] ?? null;
-                if (!is_array($link) || empty($link['url'])) continue;
-            ?>
-                <a class="uic-cta-footer__link uic-cta-footer__link__white" 
-                   href="<?= esc_url($link['url']) ?>" 
-                   <?= !empty($link['target']) ? 'target="'.esc_attr($link['target']).'" rel="noopener noreferrer"' : '' ?>>
-                    <?= esc_html($link['title'] ?: 'Learn more') ?>
-                </a>
-            <?php endforeach; ?>
-        </div>
-    <?php endif;
-}
-?>
