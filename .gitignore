@@ -7,4 +7,5 @@ dist/
 
 # WordPress/System files
 .DS_Store
+.vscode/
 thumbs.db
