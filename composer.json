@@ -1,5 +1,11 @@
 {
+    "name": "uicosss/uic_admissions_wp_theme",
+    "description": "Shared wordpress theme as a composer package",
+    "type": "wordpress-theme",
+    "license": "GPL-2.0-or-later",
     "require": {
+        "php": ">=7.4",
+        "composer/installers": "^1.0 || ^2.0",
         "guzzlehttp/guzzle": "^7.5"
     }
 }
