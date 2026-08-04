@@ -1,26 +1,23 @@
-# Install the theme package uic_admissions_wp_theme
+# uic_admissions_wp_theme
 
-Using the uic_admissions_wp_theme API (contact UIC OSSS for additional details on API)
+## Use composer `composer require uicosss/uic_admissions_wp_theme`
 
-## To use the package, you need to include in composer.json
 ```
-"require": {
+ "require": {
         "uicosss/uic_admissions_wp_theme": "^1.0"
     },
+```
+## Add additional installer-paths, run composer require uicosss/uic_admissions_wp_theme after the codeblock below is added.
+
+```
     "extra": {
         "installer-paths": {
             "web/wp-content/themes/{$name}/": ["type:wordpress-theme"],
             "web/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
             "web/wp-content/mu-plugins/{$name}/": ["type:wordpress-muplugin"]
         }
+    },
 ```
 
-## Then install dependencies 
-```
-composer install
-```
+## Failure to follow the sequence will cause the assets to not be published.
 
-## Or, if updating an existing project:
-```
-composer update
-```
