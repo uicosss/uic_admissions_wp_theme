@@ -2,11 +2,6 @@
 
 ## Use composer `composer require uicosss/uic_admissions_wp_theme`
 
-```
- "require": {
-        "uicosss/uic_admissions_wp_theme": "^1.0"
-    },
-```
 ## Add additional installer-paths, run composer require uicosss/uic_admissions_wp_theme after the codeblock below is added.
 
 ```
