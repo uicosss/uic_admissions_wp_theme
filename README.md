@@ -2,7 +2,7 @@
 
 ## Use composer `composer require uicosss/uic_admissions_wp_theme`
 
-## Add additional installer-paths, run composer require uicosss/uic_admissions_wp_theme after the codeblock below is added.
+## Add additional installer-paths, 
 
 ```
     "extra": {
@@ -14,5 +14,6 @@
     },
 ```
 
+## Run composer require uicosss/uic_admissions_wp_theme after the codeblock above is added.
 ## Failure to follow the sequence will cause the assets to not be published.
 
