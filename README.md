@@ -12,6 +12,6 @@
     },
 ```
 
-## Run composer `composer require uicosss/uic_admissions_wp_theme` after the codeblock above is added.
+## Run `composer require uicosss/uic_admissions_wp_theme` after the codeblock above is added.
 ## Failure to follow the sequence will cause the assets not to be published.
 
